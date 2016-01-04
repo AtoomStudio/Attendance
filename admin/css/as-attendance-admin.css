@@ -2,3 +2,7 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+.toplevel_page_as-attendance #wpbody-content ul {
+    list-style-type: disc;
+    margin-left: 1.5em; /* which should give space for the disc to show */
+}

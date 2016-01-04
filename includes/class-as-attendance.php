@@ -148,11 +148,20 @@ class As_Attendance {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
-
+		global $plugin_admin;
 		$plugin_admin = new As_Attendance_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action('admin_menu', $plugin_admin, 'create_person_menu');
+		$this->loader->add_action('init', $plugin_admin, 'register_group_taxonomy');
+		$this->loader->add_action('init', $plugin_admin, 'register_person_custom_post_type');
+		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type');
+        $this->loader->add_action('admin_menu', $plugin_admin, 'as_remove_custom_fields');
+        $this->loader->add_action('save_post_as-person', $plugin_admin, 'as_save_person', 10, 3);
+
+        //$this->loader->add_action('wp_insert_post_data', $plugin_admin, 'as_save_person', 10, 2);
+        //$this->loader->add_action('publish_as-person', $plugin_admin, 'as_edit_title_person', 10, 3);
 
 	}
 
