@@ -172,7 +172,7 @@ class As_Attendance_Admin {
 
 	}
 
-    public function create_person_menu() {
+    public function create_attendance_menu() {
         add_menu_page (
             __( 'Attendance', 'as-attendance' ),
             __( 'Attendance', 'as-attendance' ),
@@ -194,7 +194,7 @@ class As_Attendance_Admin {
             __('Add registry', 'as-attendance'),
             'manage_options',
             'as-attendance/new-registry.php',
-            array($this, 'create_admin_page')
+            array($this, 'new_registry_page')
         );
         add_submenu_page(
             'as-attendance/attendance.php',
@@ -220,19 +220,27 @@ class As_Attendance_Admin {
         include_once 'partials/as-attendance-admin-display.php';
     }
 
-    private function create_term_list($groups) {
-    ?>
-        <ul>
-            <?php foreach($groups as $group): ?>
-                <?php $group_children = get_terms( 'as-group', array('hide_empty'=>false, 'parent' => $group->term_id) ); ?>
-                <li><?php echo $group->name ?></li>
-                <?php if($group_children==true): ?>
-                    <?php $this->create_term_list($group_children) ?>
-                <?php endif ?>
+    public function new_registry_page() {
+        $groups = get_terms( 'as-group', array('hide_empty'=>false, 'parent' => 0) );
+        $output = $this->create_term_list($groups);
+        include_once 'partials/as-attendance-admin-new-registry.php';
+    }
 
-            <?php endforeach ?>
-        </ul>
-        <?php
+    private function create_term_list($groups, $o = "") {
+
+        $o .= "<ul>";
+        foreach($groups as $group) {
+
+            $group_children = get_terms('as-group', array('hide_empty' => false, 'parent' => $group->term_id));
+            $o .= "<li><a href='post-new.php?post_type=as-registry&as-group=".$group->term_id."'>" . $group->name . "</a></li>";
+            if ($group_children == true) {
+                $o = $this->create_term_list($group_children, $o);
+            }
+
+        }
+        $o .= "</ul>";
+
+        return $o;
     }
 
     public function register_group_taxonomy() {
@@ -288,8 +296,8 @@ class As_Attendance_Admin {
         $args = array(
             'labels' => $labels,
             'public' => true,
-            'show_ui' => true,
-            'show_in_menu' => true,
+            'show_ui' => false,
+            //'show_in_menu' => true,
             //'show_in_menu' => 'attendance',
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
@@ -465,7 +473,7 @@ class As_Attendance_Admin {
         );
         $supports = array(
             //'title',
-            'thumbnail',
+            //'thumbnail',
             'custom-fields',
         );
         $args = array(
@@ -503,7 +511,8 @@ class As_Attendance_Admin {
     }
 
     public function as_remove_custom_fields() {
-        remove_meta_box('postcustom', 'as-registry', 'normal');
         remove_meta_box('postcustom', 'as-person', 'normal');
+        remove_meta_box('postcustom', 'as-registry', 'normal');
+        remove_meta_box('as-groupdiv', 'as-registry', 'normal');
     }
 }
