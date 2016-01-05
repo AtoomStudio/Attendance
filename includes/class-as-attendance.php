@@ -159,6 +159,7 @@ class As_Attendance {
 		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type');
         $this->loader->add_action('admin_menu', $plugin_admin, 'as_remove_custom_fields');
         $this->loader->add_action('save_post_as-person', $plugin_admin, 'as_save_person', 10, 3);
+        $this->loader->add_action('save_post_as-registry', $plugin_admin, 'as_save_registry', 10, 3);
 
         //$this->loader->add_action('wp_insert_post_data', $plugin_admin, 'as_save_person', 10, 2);
         //$this->loader->add_action('publish_as-person', $plugin_admin, 'as_edit_title_person', 10, 3);

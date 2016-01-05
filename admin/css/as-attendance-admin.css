@@ -6,3 +6,7 @@
     list-style-type: disc;
     margin-left: 1.5em; /* which should give space for the disc to show */
 }
+
+.attendees-table .attendee-annotation.closed {
+    display: none;
+}

@@ -77,6 +77,14 @@ class As_Attendance_Admin {
      */
     private $person_additional_fields;
 
+    /**
+     * Info metabox fields for Registry custom post type.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      object    $version    Info metabox fields for Registry custom post type.
+     */
+    private $registry_info_fields;
 
     /**
 	 * Initialize the class and set its properties.
@@ -123,6 +131,11 @@ class As_Attendance_Admin {
             'workshop_before' => 'person_additional_workshop_before',
             'why_workshop' => 'person_additional_why_workshop',
             'time' => 'person_additional_time',
+        ];
+
+        $this->registry_info_fields = (object) [
+            'date' => 'registry_info_date',
+            'annotation' => 'registry_info_annotation',
         ];
 	}
 
@@ -296,8 +309,8 @@ class As_Attendance_Admin {
         $args = array(
             'labels' => $labels,
             'public' => true,
-            'show_ui' => false,
-            //'show_in_menu' => true,
+            'show_ui' => true,
+            'show_in_menu' => false,
             //'show_in_menu' => 'attendance',
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
@@ -406,7 +419,7 @@ class As_Attendance_Admin {
      */
     public function as_save_person($post_id, $post, $update) {
 
-        check_admin_referer( basename( __FILE__ ), 'as-person-info' );
+        //check_admin_referer( basename( __FILE__ ), 'as-person-info' );
 
         //perform authentication checks
         if (!current_user_can('edit_post', $post_id)) return false;
@@ -480,7 +493,7 @@ class As_Attendance_Admin {
             'labels' => $labels,
             'public' => true,
             'show_ui' => true,
-            'show_in_menu' => true,
+            'show_in_menu' => false,
             //'show_in_menu' => 'edit.php?post_type=as-person',
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_registry_metaboxes'),
@@ -491,28 +504,172 @@ class As_Attendance_Admin {
     }
 
     public function register_registry_metaboxes() {
+
         add_meta_box(
-            'as-registry-annotation',
-            __('Annotation', 'as-attendance'),
-            array($this, 'registry_annotation_metabox_theme'),
+            'as-registry-info',
+            __('Date and annotations', 'as-attendance'),
+            array($this, 'registry_info_metabox_theme'),
+            'as-registry',
+            'normal',
+            'default'
+        );
+
+        add_meta_box(
+            'as-registry-attendees',
+            'Attendees',
+            //$group->name,
+            array($this, 'registry_attendees_metabox_theme'),
             'as-registry',
             'normal',
             'default'
         );
     }
 
-    public function registry_annotation_metabox_theme($post) {
+    /**
+     * Retrieve as-group id from URL. Sanitizes and throw error if isn't valid.
+     *
+     * @param bool $post
+     * @return int
+     */
+    private function get_url_group($post = false) {
+        $group_id = 0;
+
+        if ( isset( $_REQUEST['as-group'] ) ) {
+            $group_id = (int) sanitize_text_field($_REQUEST['as-group']);
+            if($group_id<1){
+                wp_die( 'Please, select a group before creating a registry.' );
+            }
+            return $group_id;
+        }
+
+        if($post){
+            $group = get_the_terms( $post->ID, 'as-group' );
+            return $group[0]->term_id;
+        }
+
+        return $group_id;
+    }
+
+    /**
+     * @param $post
+     */
+    public function registry_attendees_metabox_theme($post) {
+        $groups = get_the_terms($post->ID, 'as-group');
+
+        // WP_Query arguments
+        $args = array (
+            'post_type'              => array( 'as-person' ),
+            'post_status'            => array( 'publish' ),
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'as-group',
+                    'terms'    => $groups[0]->term_id,
+                ),
+            ),
+            'nopaging'               => true,
+            'order'                  => 'ASC',
+            'orderby'                => 'title',
+        );
+
+        // The Query
+        $attendees = new WP_Query( $args );
+        $attendees_fields = array();
+        $attendees_ids = array();
+        // The Loop
+        if ( $attendees->have_posts() ) {
+            while ( $attendees->have_posts() ) {
+
+                $attendees->the_post();
+                $at_meta = get_post_meta($post->ID, 'registry_attendee_' . get_the_ID(), true);
+                $present = ! isset( $at_meta['present'] ) ? "0" : $at_meta['present'];
+                $annotation = ! isset( $at_meta['annotation'] ) ? "" : $at_meta['annotation'];
+
+                $attendees_fields[] = array(
+                    'field_name' => 'registry_attendee_' . get_the_ID(),
+                    'name' => get_the_title(),
+                    'photo' => get_the_post_thumbnail( get_the_ID(), array(90,90) ),
+                    'present' => $present,
+                    'annotation' => $annotation
+                );
+                $attendees_ids[] = get_the_ID();
+            }
+        }
+
+        wp_reset_postdata();
+
+        include_once 'partials/as-attendance-admin-registry-attendees.php';
+    }
+
+    public function registry_info_metabox_theme($post) {
         $meta = get_post_custom( $post->ID );
-        $annotation = ! isset( $meta['registry_annotation'][0] ) ? '' : $meta['registry_annotation'][0];
+        $annotation = ! isset( $meta['registry_info_annotation'][0] ) ? '' : $meta['registry_info_annotation'][0];
+        $date = ! isset( $meta['registry_info_date'][0] ) ? date('d/m/Y') : $meta['registry_info_date'][0];
 
-        wp_nonce_field( basename( __FILE__ ), 'as-registry-annotation' );
+        include_once 'partials/as-attendance-admin-registry-info.php';
+    }
 
-        include_once 'partials/as-attendance-admin-registry-annotation.php';
+    /**
+     * Save post metadata when a post is saved.
+     *
+     * @param int $post_id The post ID.
+     * @param WP_Post $post The post object.
+     * @param bool $update Whether this is an existing post being updated or not.
+     *
+     * @return boolean
+     */
+    public function as_save_registry($post_id, $post, $update) {
+
+        //check_admin_referer( 'save-registry', 'as-registry-info' );
+
+
+        //perform authentication checks
+        if (!current_user_can('edit_post', $post_id)) return false;
+
+        $group_id = $this->get_url_group($post);
+        wp_set_object_terms( $post_id, $group_id, 'as-group' );
+        $group = get_term($group_id, 'as-group');
+
+//        var_dump($this->registry_info_fields);
+//        var_dump($_REQUEST);die;
+
+        foreach($this->registry_info_fields as $key => $field_name) {
+            if ( isset( $_REQUEST[$field_name] ) ) {
+                update_post_meta( $post_id, $field_name, sanitize_text_field( $_REQUEST[$field_name] ) );
+            }
+        }
+
+        $attendees_ids = array();
+        if ( isset( $_REQUEST['registry_attendees_ids'] ) ) {
+            $attendees_ids = explode(',', $_REQUEST['registry_attendees_ids']);
+        }
+
+        foreach ($attendees_ids as $aid) {
+            if ( isset( $_REQUEST['registry_attendee_'.$aid] ) ) {
+                update_post_meta( $post_id, 'registry_attendee_'.$aid, $_REQUEST['registry_attendee_'.$aid] );
+            }
+        }
+
+        // unhook this function so it doesn't loop infinitely
+        global $plugin_admin;
+        remove_action('save_post_as-registry', array($plugin_admin, 'as_save_registry'));
+
+        //Set the post title in format: Surname, Name
+        $post_title = sanitize_text_field($_REQUEST[$this->registry_info_fields->date]) . ' - ' . $group->name;
+
+        $edited_post = array(
+            'ID' => $post_id,
+            'post_title' => $post_title,
+        );
+        if ( !in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
+            $edited_post['post_name'] = sanitize_title( $post_title );
+        }
+        wp_update_post( $edited_post );
+
     }
 
     public function as_remove_custom_fields() {
         remove_meta_box('postcustom', 'as-person', 'normal');
         remove_meta_box('postcustom', 'as-registry', 'normal');
-        remove_meta_box('as-groupdiv', 'as-registry', 'normal');
+        //remove_meta_box('as-groupdiv', 'as-registry', 'normal');
     }
 }
