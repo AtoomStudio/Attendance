@@ -468,6 +468,117 @@ class As_Attendance_Admin {
 
     }
 
+    public function person_filters( $post_type ) {
+
+        if($post_type === "as-person") {
+            global $wp_query;
+
+            $tax_slug = 'as-group';
+
+            $tax_obj = get_taxonomy($tax_slug);
+
+            wp_dropdown_categories(array(
+                'show_option_all' =>  sprintf(__("Show All %s", "as-attendance"), $tax_obj->label),
+                'taxonomy'        =>  $tax_slug,
+                'name'            =>  'as-group',
+                'orderby'         =>  'name',
+                'selected'        =>  $wp_query->query['term'],
+                'hierarchical'    =>  true,
+                //'depth'           =>  3,
+                'show_count'      =>  true, // Show # listings in parens
+                'hide_empty'      =>  true, // Don't show businesses w/o listings
+                'value_field'     =>  'slug'
+            ));
+
+        }
+    }
+
+    public function person_columns( $columns ) {
+
+        $columns = array(
+            'cb' => '<input type="checkbox" />',
+            'surname' => __( 'Surname', 'as-attendance' ),
+            'name' => __( 'Name', 'as-attendance' ),
+            'taxonomy-as-group' => __( 'Group', 'as-attendance' ),
+            'person_contact_1_name' => __( 'Contact 1', 'as-attendance' ),
+            'person_contact_2_name' => __( 'Contact 2', 'as-attendance' ),
+            'actions' => __( 'Actions' )
+        );
+        return $columns;
+    }
+
+    public function person_sortable_columns( $columns ) {
+        $columns['surname'] = 'surname';
+        $columns['name'] = 'name';
+        $columns['taxonomy-as-group'] = 'as-group';
+
+        return $columns;
+    }
+
+    public function person_columns_column( $column, $post_id ) {
+        global $post;
+
+        switch( $column ) {
+
+            case 'surname' :
+
+                $surname = get_post_meta( $post_id, 'person_info_surname', true );
+
+                if ( empty( $surname ) )
+                    echo '';
+                else
+                    echo $surname;
+
+                break;
+
+            case 'name' :
+
+                $name = get_post_meta( $post_id, 'person_info_name', true );
+
+                if ( empty( $name ) )
+                    echo '';
+                else
+                    echo $name;
+
+                break;
+
+            case 'person_contact_1_name' :
+
+                $contact = get_post_meta( $post_id, 'person_contact_1_name', true );
+
+                if ( empty( $contact ) )
+                    echo '';
+                else
+                    echo $contact;
+
+                break;
+
+            case 'person_contact_2_name' :
+
+                $contact = get_post_meta( $post_id, 'person_contact_2_name', true );
+
+                if ( empty( $contact ) )
+                    echo '';
+                else
+                    echo $contact;
+
+                break;
+
+            case 'actions' :
+
+                edit_post_link( __('Edit') );
+                echo " - ";
+                echo "<a href='#'>".__('Registries', 'as-attendance')."</a>";
+                echo " - ";
+                echo "<a href='".get_delete_post_link()."' class='delete'>".__('Delete')."</a>";
+
+                break;
+
+            default :
+                break;
+        }
+    }
+
     public function register_registry_custom_post_type() {
 
         $labels = array(
@@ -682,7 +793,7 @@ class As_Attendance_Admin {
             'post_date' => $post_date,
             'post_date_gmt' => $post_date,
         );
-        
+
         if ( !in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
             $edited_post['post_name'] = sanitize_title( $post_title );
         }
