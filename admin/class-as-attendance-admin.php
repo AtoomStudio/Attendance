@@ -566,6 +566,7 @@ class As_Attendance_Admin {
      */
     public function registry_attendees_metabox_theme($post) {
         $groups = get_the_terms($post->ID, 'as-group');
+        $group = $groups[0];
 
         // WP_Query arguments
         $args = array (
@@ -574,7 +575,7 @@ class As_Attendance_Admin {
             'tax_query' => array(
                 array(
                     'taxonomy' => 'as-group',
-                    'terms'    => $groups[0]->term_id,
+                    'terms'    => $group->term_id,
                 ),
             ),
             'nopaging'               => true,
@@ -637,7 +638,6 @@ class As_Attendance_Admin {
 
         //check_admin_referer( 'save-registry', 'as-registry-info' );
 
-
         //perform authentication checks
         if (!current_user_can('edit_post', $post_id)) return false;
 
@@ -669,13 +669,20 @@ class As_Attendance_Admin {
         global $plugin_admin;
         remove_action('save_post_as-registry', array($plugin_admin, 'as_save_registry'));
 
-        //Set the post title in format: Surname, Name
-        $post_title = sanitize_text_field($_REQUEST[$this->registry_info_fields->date]) . ' - ' . $group->name;
+        $date = $_REQUEST['registry_info_date'];
+        $date_arr = explode('/', $date);
+        $post_date = date('Y-m-d H:i:s', strtotime($date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0]));
+
+        //Set the post title in format: Date - Group
+        $post_title = sanitize_text_field($date) . ' - ' . $group->name;
 
         $edited_post = array(
             'ID' => $post_id,
             'post_title' => $post_title,
+            'post_date' => $post_date,
+            'post_date_gmt' => $post_date,
         );
+        
         if ( !in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
             $edited_post['post_name'] = sanitize_title( $post_title );
         }
@@ -686,6 +693,7 @@ class As_Attendance_Admin {
     public function as_remove_custom_fields() {
         remove_meta_box('postcustom', 'as-person', 'normal');
         remove_meta_box('postcustom', 'as-registry', 'normal');
-        //remove_meta_box('as-groupdiv', 'as-registry', 'normal');
+        remove_meta_box('submitdiv', 'as-registry', 'normal');
+        remove_meta_box('as-groupdiv', 'as-registry', 'normal');
     }
 }
