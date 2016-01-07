@@ -159,6 +159,8 @@ class As_Attendance_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/as-attendance-admin.css', array(), $this->version, 'all' );
+        wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
+        wp_enqueue_style( 'jquery-ui' );
 
 	}
 
@@ -181,7 +183,7 @@ class As_Attendance_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/as-attendance-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/as-attendance-admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ), $this->version, false );
 
 	}
 
@@ -516,9 +518,18 @@ class As_Attendance_Admin {
 
         add_meta_box(
             'as-registry-attendees',
-            'Attendees',
+            __('Attendees'),
             //$group->name,
             array($this, 'registry_attendees_metabox_theme'),
+            'as-registry',
+            'normal',
+            'default'
+        );
+
+        add_meta_box(
+            'as-registry-save',
+            __('Save'),
+            array($this, 'registry_save_metabox_theme'),
             'as-registry',
             'normal',
             'default'
@@ -606,6 +617,11 @@ class As_Attendance_Admin {
         $date = ! isset( $meta['registry_info_date'][0] ) ? date('d/m/Y') : $meta['registry_info_date'][0];
 
         include_once 'partials/as-attendance-admin-registry-info.php';
+    }
+
+    public function registry_save_metabox_theme($post) {
+        submit_button();
+        echo "<div class='clear'></div>";
     }
 
     /**

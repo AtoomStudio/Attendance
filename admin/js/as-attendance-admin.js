@@ -8,6 +8,13 @@
 			$(_target).removeClass('closed');
 			$(this).hide();
 		});
+		$('.datepicker').datepicker({
+      firstDay: 1,
+      dateFormat: "dd/mm/yy",
+      buttonImage: "images/date-button.gif",
+      buttonImageOnly: true,
+      showOn: "both"
+    });
 	});
 
 })( jQuery );

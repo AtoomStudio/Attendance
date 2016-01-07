@@ -15,7 +15,7 @@
             </label>
         </td>
         <td colspan="4">
-            <input type="text" id="registry_info_date" name="registry_info_date" class="regular-text" value="<?php echo $date; ?>" required />
+            <input type="text" id="registry_info_date" name="registry_info_date" class="regular-text datepicker" value="<?php echo $date; ?>" required readonly />
         </td>
     </tr>
 
