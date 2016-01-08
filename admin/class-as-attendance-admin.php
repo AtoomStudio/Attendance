@@ -161,8 +161,9 @@ class As_Attendance_Admin {
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/as-attendance-admin.css', array(), $this->version, 'all' );
         wp_register_style('jquery-ui', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css');
         wp_enqueue_style( 'jquery-ui' );
+        wp_enqueue_style( 'thickbox' );
 
-	}
+    }
 
 	/**
 	 * Register the JavaScript for the admin area.
@@ -184,6 +185,7 @@ class As_Attendance_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/as-attendance-admin.js', array( 'jquery', 'jquery-ui-core', 'jquery-ui-datepicker' ), $this->version, false );
+        wp_enqueue_script( 'thickbox' );
 
 	}
 
@@ -200,8 +202,7 @@ class As_Attendance_Admin {
             __('Registries', 'as-attendance'),
             __('Registries', 'as-attendance'),
             'manage_options',
-            'as-attendance/registries.php',
-            array($this, 'create_admin_page')
+            'edit.php?post_type=as-registry'
         );
         add_submenu_page(
             'as-attendance/attendance.php',
@@ -217,7 +218,6 @@ class As_Attendance_Admin {
             __('Persons', 'as-attendance'),
             'manage_options',
             'edit.php?post_type=as-person'
-            //array($this, 'create_admin_page')
         );
         add_submenu_page(
             'as-attendance/attendance.php',
@@ -471,24 +471,57 @@ class As_Attendance_Admin {
     public function person_filters( $post_type ) {
 
         if($post_type === "as-person") {
-            global $wp_query;
 
             $tax_slug = 'as-group';
 
             $tax_obj = get_taxonomy($tax_slug);
 
-            wp_dropdown_categories(array(
-                'show_option_all' =>  sprintf(__("Show All %s", "as-attendance"), $tax_obj->label),
-                'taxonomy'        =>  $tax_slug,
-                'name'            =>  'as-group',
-                'orderby'         =>  'name',
-                'selected'        =>  $wp_query->query['term'],
-                'hierarchical'    =>  true,
-                //'depth'           =>  3,
-                'show_count'      =>  true, // Show # listings in parens
-                'hide_empty'      =>  true, // Don't show businesses w/o listings
-                'value_field'     =>  'slug'
+            $group = (isset($_REQUEST['as-group']) ? $_REQUEST['as-group'] : 0);
+            $contact = (isset($_REQUEST['person_contact_name']) ? $_REQUEST['person_contact_name'] : '');
+            $name = (isset($_REQUEST['person_info_name']) ? $_REQUEST['person_info_name'] : '');
+            $surname = (isset($_REQUEST['person_info_surname']) ? $_REQUEST['person_info_surname'] : '');
+
+            $groups_dropdown = wp_dropdown_categories(array(
+                'show_option_all'   =>  sprintf(__("Show All %s", "as-attendance"), $tax_obj->label),
+                'taxonomy'          =>  $tax_slug,
+                'name'              =>  'as-group',
+                'orderby'           =>  'name',
+                'selected'          =>  $group,
+                'hierarchical'      =>  true,
+                'show_count'        =>  true,
+                'hide_empty'        =>  true,
+                'value_field'       =>  'slug',
+                'echo'              =>  0
             ));
+
+            include 'partials/as-attendance-admin-person-filters.php';
+        }
+    }
+
+    public function registry_filters( $post_type ) {
+
+        if($post_type === "as-registry") {
+
+            $tax_slug = 'as-group';
+            $tax_obj = get_taxonomy($tax_slug);
+
+            $group = (isset($_REQUEST['as-group']) ? $_REQUEST['as-group'] : 0);
+            $date = (isset($_REQUEST['registry_info_date']) ? $_REQUEST['registry_info_date'] : '');
+
+            $groups_dropdown = wp_dropdown_categories(array(
+                'show_option_all'   =>  sprintf(__("Show All %s", "as-attendance"), $tax_obj->label),
+                'taxonomy'          =>  $tax_slug,
+                'name'              =>  'as-group',
+                'orderby'           =>  'name',
+                'selected'          =>  $group,
+                'hierarchical'      =>  true,
+                'show_count'        =>  true,
+                'hide_empty'        =>  true,
+                'value_field'       =>  'slug',
+                'echo'              =>  0
+            ));
+
+            include 'partials/as-attendance-admin-registry-filters.php';
 
         }
     }
@@ -507,6 +540,19 @@ class As_Attendance_Admin {
         return $columns;
     }
 
+    public function registry_columns( $columns ) {
+
+        $columns = array(
+            'cb' => '<input type="checkbox" />',
+            'title' => __( 'Title', 'as-attendance' ),
+            'date' => __( 'Date', 'as-attendance' ),
+            'taxonomy-as-group' => __( 'Group', 'as-attendance' ),
+            'attendance' => __( 'Attendance', 'as-attendance' ),
+            'annotation' => __( 'Annotation', 'as-attendance' ),
+        );
+        return $columns;
+    }
+
     public function person_sortable_columns( $columns ) {
         $columns['surname'] = 'surname';
         $columns['name'] = 'name';
@@ -515,8 +561,13 @@ class As_Attendance_Admin {
         return $columns;
     }
 
+    public function registry_sortable_columns( $columns ) {
+        $columns['taxonomy-as-group'] = 'as-group';
+
+        return $columns;
+    }
+
     public function person_columns_column( $column, $post_id ) {
-        global $post;
 
         switch( $column ) {
 
@@ -576,6 +627,121 @@ class As_Attendance_Admin {
 
             default :
                 break;
+        }
+
+    }
+
+    public function registry_columns_column( $column, $post_id ) {
+
+        switch( $column ) {
+
+            case 'attendance' :
+
+                $attendees_ids = get_post_meta( $post_id, 'registry_attendees_ids', true );
+                //var_dump($attendees_ids);die;
+
+                if ( empty( $attendees_ids ) )
+                    echo '0/0';
+                else {
+                    $attendees = 0;
+                    foreach ($attendees_ids as $id) {
+                        $attendee = get_post_meta( $post_id, 'registry_attendee_'.$id, true );
+                        if(isset($attendee['present'])&&$attendee['present']=="1"){
+                            $attendees++;
+                        }
+                    }
+                    echo $attendees . '/' . count($attendees_ids);
+                }
+
+                break;
+
+            case 'annotation' :
+
+                $annotation = get_post_meta( $post_id, 'registry_info_annotation', true );
+
+                if ( empty( $annotation ) )
+                    echo '';
+                else
+                    echo $annotation;
+
+                break;
+
+            default :
+                break;
+        }
+
+    }
+
+    public function as_filter_admin_results( $query ) {
+        if(is_admin()) {
+
+            switch ($query->query["post_type"]) {
+                case 'as-person':
+                    if(isset($_REQUEST['person_contact_name'])&&!empty($_REQUEST['person_contact_name'])) {
+                        $query->set( 'meta_query', array(
+                            'contact' => array(
+                                'relation' => 'OR',
+                                array(
+                                    'key'     => 'person_contact_1_name',
+                                    'value'   => sanitize_text_field($_REQUEST['person_contact_name']),
+                                    'compare' => 'LIKE'
+                                ),
+                                array(
+                                    'key'     => 'person_contact_2_name',
+                                    'value'   => sanitize_text_field($_REQUEST['person_contact_name']),
+                                    'compare' => 'LIKE'
+                                )
+                            )
+                        ) );
+                    }
+
+                    $meta_q_name = array();
+                    if(isset($_REQUEST['person_info_name'])&&!empty($_REQUEST['person_info_name'])) {
+//                        $query->set( 'meta_query', array(
+//                            'relation' => 'AND',
+//                            array(
+//                                'key'     => 'person_info_name',
+//                                'value'   => sanitize_text_field($_REQUEST['person_info_name']),
+//                                'compare' => 'LIKE'
+//                            )
+//                        ) );
+                        $meta_q_name[] = array(
+                            'key'     => 'person_info_name',
+                            'value'   => sanitize_text_field($_REQUEST['person_info_name']),
+                            'compare' => 'LIKE'
+                        );
+                    }
+                    if(isset($_REQUEST['person_info_surname'])&&!empty($_REQUEST['person_info_surname'])) {
+//                        $query->set( 'meta_query', array(
+//                            'relation' => 'AND',
+//                            array(
+//                                'key'     => 'person_info_surname',
+//                                'value'   => sanitize_text_field($_REQUEST['person_info_surname']),
+//                                'compare' => 'LIKE'
+//                            )
+//                        ) );
+                        $meta_q_name[] = array(
+                            'key'     => 'person_info_surname',
+                            'value'   => sanitize_text_field($_REQUEST['person_info_surname']),
+                            'compare' => 'LIKE'
+                        );
+                    }
+                    if(!empty($meta_q_name)){
+                        $query->set( 'meta_query', array(
+                            'name' => array(
+                                'relation' => 'AND',
+                                $meta_q_name
+                            )
+                        ) );
+                    }
+                    break;
+                case 'as-registry':
+                    break;
+
+                default:
+                    break;
+            }
+
         }
     }
 
@@ -756,9 +922,6 @@ class As_Attendance_Admin {
         wp_set_object_terms( $post_id, $group_id, 'as-group' );
         $group = get_term($group_id, 'as-group');
 
-//        var_dump($this->registry_info_fields);
-//        var_dump($_REQUEST);die;
-
         foreach($this->registry_info_fields as $key => $field_name) {
             if ( isset( $_REQUEST[$field_name] ) ) {
                 update_post_meta( $post_id, $field_name, sanitize_text_field( $_REQUEST[$field_name] ) );
@@ -768,6 +931,7 @@ class As_Attendance_Admin {
         $attendees_ids = array();
         if ( isset( $_REQUEST['registry_attendees_ids'] ) ) {
             $attendees_ids = explode(',', $_REQUEST['registry_attendees_ids']);
+            update_post_meta( $post_id, 'registry_attendees_ids', $attendees_ids );
         }
 
         foreach ($attendees_ids as $aid) {
@@ -806,5 +970,18 @@ class As_Attendance_Admin {
         remove_meta_box('postcustom', 'as-registry', 'normal');
         remove_meta_box('submitdiv', 'as-registry', 'normal');
         remove_meta_box('as-groupdiv', 'as-registry', 'normal');
+    }
+
+    public function as_remove_date_filter( $months, $post_type ) {
+        switch ($post_type) {
+            case 'as-person':
+            case 'as-registry':
+                return false;
+                break;
+
+            default:
+                return $months;
+            break;
+        }
     }
 }

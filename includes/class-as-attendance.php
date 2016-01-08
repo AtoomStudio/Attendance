@@ -158,14 +158,20 @@ class As_Attendance {
 		$this->loader->add_action('init', $plugin_admin, 'register_person_custom_post_type');
 		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type');
         $this->loader->add_action('admin_menu', $plugin_admin, 'as_remove_custom_fields');
-        $this->loader->add_action('save_post_as-person', $plugin_admin, 'as_save_person', 10, 3);
-        $this->loader->add_action('save_post_as-registry', $plugin_admin, 'as_save_registry', 10, 3);
-        $this->loader->add_action('restrict_manage_posts', $plugin_admin, 'person_filters', 10, 1);
-        $this->loader->add_action('manage_edit-as-person_columns', $plugin_admin, 'person_columns', 10, 1);
+        $this->loader->add_action('months_dropdown_results', $plugin_admin, 'as_remove_date_filter', 10, 2);
+		$this->loader->add_action('save_post_as-person', $plugin_admin, 'as_save_person', 10, 3);
+		$this->loader->add_action('save_post_as-registry', $plugin_admin, 'as_save_registry', 10, 3);
+		$this->loader->add_action('restrict_manage_posts', $plugin_admin, 'person_filters', 10, 1);
+		$this->loader->add_action('manage_edit-as-person_columns', $plugin_admin, 'person_columns', 10, 1);
 		$this->loader->add_action('manage_edit-as-person_sortable_columns', $plugin_admin, 'person_sortable_columns', 10, 1);
 		$this->loader->add_action('manage_as-person_posts_custom_column', $plugin_admin, 'person_columns_column', 10, 2);
+		$this->loader->add_action('restrict_manage_posts', $plugin_admin, 'registry_filters', 10, 1);
+		$this->loader->add_action('manage_edit-as-registry_columns', $plugin_admin, 'registry_columns', 10, 1);
+		$this->loader->add_action('manage_edit-as-registry_sortable_columns', $plugin_admin, 'registry_sortable_columns', 10, 1);
+		$this->loader->add_action('manage_as-registry_posts_custom_column', $plugin_admin, 'registry_columns_column', 10, 2);
+		$this->loader->add_action('parse_query', $plugin_admin, 'as_filter_admin_results', 10, 1);
 
-        //$this->loader->add_action('wp_insert_post_data', $plugin_admin, 'as_save_person', 10, 2);
+		//$this->loader->add_action('wp_insert_post_data', $plugin_admin, 'as_save_person', 10, 2);
         //$this->loader->add_action('publish_as-person', $plugin_admin, 'as_edit_title_person', 10, 3);
 
 	}

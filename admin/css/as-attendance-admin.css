@@ -10,3 +10,18 @@
 .attendees-table .attendee-annotation.closed {
     display: none;
 }
+
+.wp-admin.post-type-as-person .actions,
+.wp-admin.post-type-as-registry .actions
+{
+    float:none;
+}
+
+.wp-admin.post-type-as-registry .tablenav .actions div.postform,
+.wp-admin.post-type-as-registry .tablenav .actions input,
+.wp-admin.post-type-as-person .tablenav .actions input
+{
+    float: left;
+    height: 28px;
+    margin-right: 6px;
+}
