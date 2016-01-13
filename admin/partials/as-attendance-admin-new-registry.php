@@ -13,8 +13,9 @@
  */
 ?>
 
-<div class="as-attendance as-attendance-admin">
-<?php echo $output ?>
+<div class="as-attendance as-attendance-admin wrap">
+    <h1><?php _e('Add registry', 'as-attendance') ?></h1>
+    <p><?php _e('Select the group you want to create the attendance registry', 'as-attendance') ?></p>
+    <?php echo $output ?>
 </div>
-
 

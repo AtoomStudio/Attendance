@@ -15,7 +15,6 @@
         </td>
         <td colspan="4">
             <input required type="text" id="person_info_name" name="person_info_name" class="regular-text" value="<?php echo $name; ?>">
-            <!--                    <p class="description">--><?php //_e( 'E.g. CEO, Sales Lead, Designer', 'as-attendance' ); ?><!--</p>-->
         </td>
     </tr>
 
@@ -35,7 +34,35 @@
             </label>
         </td>
         <td colspan="4">
-            <input type="text" id="person_info_birthdate" name="person_info_birthdate" class="regular-text" value="<?php echo $birthdate; ?>">
+            <?php $birthdate_array = explode('/', $birthdate) ?>
+            <?php $birthdate_array = (count($birthdate_array)<3) ? array('','','') : $birthdate_array; ?>
+            <select name="person_info_birthdate[day]" id="person_info_birthdate_day">
+                <option value=""><?php _e('Day', 'as-attendance') ?></option>
+                <?php for($i=1;$i<=31;$i++): ?>
+                    <option value="<?php echo $i ?>" <?php selected( $birthdate_array[0], $i ); ?>><?php echo $i ?></option>
+                <?php endfor; ?>
+            </select>
+            <select name="person_info_birthdate[month]" id="person_info_birthdate_month">
+                <option value=""><?php _e('Month', 'as-attendance') ?></option>
+                <?php for($i=1;$i<=12;$i++): ?>
+                    <option value="<?php echo $i ?>" <?php selected( $birthdate_array[1], $i ); ?>><?php echo $i ?></option>
+                <?php endfor; ?>
+            </select>
+            <select name="person_info_birthdate[year]" id="person_info_birthdate_year">
+                <option value=""><?php _e('Year', 'as-attendance') ?></option>
+                <?php for($i=date('Y')-120;$i<=date('Y')-18;$i++): ?>
+                    <option value="<?php echo $i ?>" <?php selected( $birthdate_array[2], $i ); ?>><?php echo $i ?></option>
+                <?php endfor; ?>
+            </select>
+            <?php if(!empty($birthdate_array[0])): ?>
+                <?php
+                $then_ts = strtotime($birthdate_array[2].'-'.$birthdate_array[1].'-'.$birthdate_array[0]);
+                $then_year = date('Y', $then_ts);
+                $age = date('Y') - $then_year;
+                if(strtotime('+' . $age . ' years', $then_ts) > time()) $age--;
+                ?>
+                <p class="description"><?php printf(__( '%d years old.', 'as-attendance' ), $age); ?></p>
+            <?php endif; ?>
         </td>
     </tr>
 
@@ -105,7 +132,14 @@
             </label>
         </td>
         <td colspan="4">
-            <input type="text" id="person_info_civilstate" name="person_info_civilstate" class="regular-text" value="<?php echo $civilstate; ?>">
+            <select name="person_info_civilstate" id="person_info_civilstate">
+                <option value=""><?php _e('Select one', 'as-attendance') ?></option>
+                <option value="Single" <?php selected( $civilstate, 'Single' ); ?>><?php _e('Single', 'as-attendance') ?></option>
+                <option value="Married" <?php selected( $civilstate, 'Married' ); ?>><?php _e('Married', 'as-attendance') ?></option>
+                <option value="Divorced" <?php selected( $civilstate, 'Divorced' ); ?>><?php _e('Divorced', 'as-attendance') ?></option>
+                <option value="Couple" <?php selected( $civilstate, 'Couple' ); ?>><?php _e('Couple', 'as-attendance') ?></option>
+                <option value="Widower" <?php selected( $civilstate, 'Widower' ); ?>><?php _e('Widower', 'as-attendance') ?></option>
+            </select>
         </td>
     </tr>
 

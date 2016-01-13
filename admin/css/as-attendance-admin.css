@@ -25,3 +25,8 @@
     height: 28px;
     margin-right: 6px;
 }
+
+#wp-admin-bar-new-as-registry,
+.post-type-as-registry .page-title-action {
+    display: none;
+}
