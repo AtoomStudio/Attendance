@@ -98,7 +98,7 @@ class As_Attendance_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-        $this->person_info_fields = (object) [
+        $this->person_info_fields = (object) array(
             'name' => 'person_info_name',
             'surname' => 'person_info_surname',
             'birthdate' => 'person_info_birthdate',
@@ -110,18 +110,18 @@ class As_Attendance_Admin {
             'telephone' => 'person_info_telephone',
             'civilstate' => 'person_info_civilstate',
             'observations' => 'person_info_observations',
-        ];
-        $this->person_contact_1_fields = (object) [
+        );
+        $this->person_contact_1_fields = (object) array(
             'name' => 'person_contact_1_name',
             'telephone' => 'person_contact_1_telephone',
             'relationship' => 'person_contact_1_relationship',
-        ];
-        $this->person_contact_2_fields = (object) [
+        );
+        $this->person_contact_2_fields = (object) array(
             'name' => 'person_contact_2_name',
             'telephone' => 'person_contact_2_telephone',
             'relationship' => 'person_contact_2_relationship',
-        ];
-        $this->person_additional_fields = (object) [
+        );
+        $this->person_additional_fields = (object) array(
             'education_level' => 'person_additional_education_level',
             'profession' => 'person_additional_profession',
             'hobbies' => 'person_additional_hobbies',
@@ -131,12 +131,12 @@ class As_Attendance_Admin {
             'workshop_before' => 'person_additional_workshop_before',
             'why_workshop' => 'person_additional_why_workshop',
             'time' => 'person_additional_time',
-        ];
+        );
 
-        $this->registry_info_fields = (object) [
+        $this->registry_info_fields = (object) array(
             'date' => 'registry_info_date',
             'annotation' => 'registry_info_annotation',
-        ];
+        );
 	}
 
 	/**
@@ -328,7 +328,8 @@ class As_Attendance_Admin {
             //'show_in_menu' => 'attendance',
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
-            'taxonomies' => array('as-group')
+            'taxonomies' => array('as-group'),
+            'menu_icon' => 'dashicons-universal-access'
         );
 
         register_post_type( 'as-person', $args );
@@ -941,6 +942,7 @@ class As_Attendance_Admin {
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_registry_metaboxes'),
             'taxonomies' => array('as-group'),
+            'menu_icon' => 'dashicons-clipboard'
         );
 
         register_post_type( 'as-registry', $args );
