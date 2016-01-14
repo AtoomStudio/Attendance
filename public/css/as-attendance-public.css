@@ -2,3 +2,14 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+
+.person-info,
+.person-address,
+.person-contact dl {
+    float: left;
+    width:50%;
+}
+
+.person-contact {
+    clear: both;
+}

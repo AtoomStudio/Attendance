@@ -14,7 +14,7 @@
  * The public-facing functionality of the plugin.
  *
  * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
+ * enqueue the public-specific stylesheet and JavaScript.
  *
  * @package    As_Attendance
  * @subpackage As_Attendance/public
@@ -41,16 +41,26 @@ class As_Attendance_Public {
 	private $version;
 
 	/**
+	 * The path of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_path    The path of this plugin.
+	 */
+	private $plugin_path;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
+	 * @param      string    $plugin_path       The path of the plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-
+	public function __construct( $plugin_name, $version, $plugin_path ) {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->plugin_path = $plugin_path;
 
 	}
 
@@ -100,4 +110,18 @@ class As_Attendance_Public {
 
 	}
 
+	public function load_person_template($template) {
+		global $post;
+
+		if ($post->post_type == "as-person"){
+			$template_name = 'templates/single-as-person.php';
+			if($template === get_stylesheet_directory() . $template_name
+				|| !file_exists($this->plugin_path . $template_name)) {
+				return $template;
+			}
+
+			return $this->plugin_path . $template_name;
+		}
+
+	}
 }

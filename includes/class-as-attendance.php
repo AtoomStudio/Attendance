@@ -49,6 +49,15 @@ class As_Attendance {
 	protected $plugin_name;
 
 	/**
+	 * The url path of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      string    $plugin_name    The url path of this plugin.
+	 */
+	protected $plugin_path;
+
+	/**
 	 * The current version of the plugin.
 	 *
 	 * @since    1.0.0
@@ -70,6 +79,7 @@ class As_Attendance {
 
 		$this->plugin_name = 'as-attendance';
 		$this->version = '1.0.0';
+		$this->plugin_path = plugin_dir_path( __DIR__ );
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -185,10 +195,11 @@ class As_Attendance {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new As_Attendance_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new As_Attendance_Public( $this->get_plugin_name(), $this->get_version(), $this->get_plugin_path() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		$this->loader->add_action( 'single_template', $plugin_public, 'load_person_template' );
 
 	}
 
@@ -210,6 +221,16 @@ class As_Attendance {
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
+	}
+
+	/**
+	 * Retrieve the path url of the plugin
+	 *
+	 * @since     1.0.0
+	 * @return    string    The path of the plugin.
+	 */
+	public function get_plugin_path() {
+		return $this->plugin_path;
 	}
 
 	/**
