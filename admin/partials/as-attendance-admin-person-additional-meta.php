@@ -68,16 +68,6 @@
 
     <tr>
         <td colspan="2">
-            <label for="person_additional_memory_workshop"><?php _e( 'Memory workshop', 'as-attendance' ); ?></label>
-            <p class="description">REVISAR!!</p>
-        </td>
-        <td colspan="4">
-            <input type="text" id="person_additional_memory_workshop" name="person_additional_memory_workshop" class="regular-text" value="<?php echo $memory_workshop; ?>">
-        </td>
-    </tr>
-
-    <tr>
-        <td colspan="2">
             <label for="person_additional_workshop_before"><?php _e( 'Has he/she participated in memory workshops before?', 'as-attendance' ); ?></label>
         </td>
         <td colspan="4">

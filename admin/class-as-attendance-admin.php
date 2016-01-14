@@ -127,7 +127,6 @@ class As_Attendance_Admin {
             'hobbies' => 'person_additional_hobbies',
             'medical_history' => 'person_additional_medical_history',
             'mother_tongue' => 'person_additional_mother_tongue',
-            'memory_workshop' => 'person_additional_memory_workshop',
             'workshop_before' => 'person_additional_workshop_before',
             'why_workshop' => 'person_additional_why_workshop',
             'time' => 'person_additional_time',
