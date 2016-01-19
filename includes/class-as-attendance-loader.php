@@ -42,6 +42,15 @@ class As_Attendance_Loader {
 	protected $filters;
 
 	/**
+	 * The array of shortcodes registered with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $shortcodes    The shortcodes registered with WordPress to fire when the plugin loads.
+	 */
+	protected $shortcodes;
+
+	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
 	 * @since    1.0.0
@@ -50,6 +59,7 @@ class As_Attendance_Loader {
 
 		$this->actions = array();
 		$this->filters = array();
+		$this->shortcodes = array();
 
 	}
 
@@ -79,6 +89,22 @@ class As_Attendance_Loader {
 	 */
 	public function add_filter( $hook, $component, $callback, $priority = 10, $accepted_args = 1 ) {
 		$this->filters = $this->add( $this->filters, $hook, $component, $callback, $priority, $accepted_args );
+	}
+
+	/**
+	 * Add a new shortcode to the collection to be registered with WordPress.
+	 *
+	 * @since    1.0.0
+	 * @param    string               $tag              The tag for shortcode that is being registered.
+	 * @param    object               $component        A reference to the instance of the object on which the filter is defined.
+	 * @param    string               $callback         The name of the function definition on the $component.
+	 */
+	public function add_shortcode( $tag, $component, $callback ) {
+		$this->shortcodes[] = array(
+			'tag' => $tag,
+			'component' => $component,
+			'callback' => $callback
+		);
 	}
 
 	/**
@@ -123,7 +149,15 @@ class As_Attendance_Loader {
 		foreach ( $this->actions as $hook ) {
 			add_action( $hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args'] );
 		}
+//		var_dump($this->actions);
+//		var_dump($this->shortcodes);
 
+		foreach ( $this->shortcodes as $shortcode ) {
+			add_shortcode( $shortcode['tag'], array( $shortcode['component'], $shortcode['callback'] ) );
+		}
+//		global $shortcode_tags;
+//		echo "<pre>"; print_r($shortcode_tags); echo "</pre>";
+//		die;
 	}
 
 }

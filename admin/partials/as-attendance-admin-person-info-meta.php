@@ -149,7 +149,8 @@
             </label>
         </td>
         <td colspan="4">
-            <input type="text" id="person_info_observations" name="person_info_observations" class="regular-text" value="<?php echo $observations; ?>">
+            <textarea id="person_info_observations" name="person_info_observations" class="large-text" rows="4"><?php echo $observations; ?></textarea>
+<!--            <input type="text" id="person_info_observations" name="person_info_observations" class="regular-text" value="--><?php //echo $observations; ?><!--">-->
         </td>
     </tr>
 

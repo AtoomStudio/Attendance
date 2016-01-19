@@ -30,7 +30,12 @@ class As_Attendance_Deactivator {
 	 * @since    1.0.0
 	 */
 	public static function deactivate() {
+		//self::remove_roles();
+	}
 
+	private static function remove_roles() {
+		remove_role( 'attendance_admin' );
+		remove_role( 'attendance_collaborator' );
 	}
 
 }

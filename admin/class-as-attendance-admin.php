@@ -127,9 +127,9 @@ class As_Attendance_Admin {
             'hobbies' => 'person_additional_hobbies',
             'medical_history' => 'person_additional_medical_history',
             'mother_tongue' => 'person_additional_mother_tongue',
-            'workshop_before' => 'person_additional_workshop_before',
-            'why_workshop' => 'person_additional_why_workshop',
-            'time' => 'person_additional_time',
+//            'workshop_before' => 'person_additional_workshop_before',
+//            'why_workshop' => 'person_additional_why_workshop',
+//            'time' => 'person_additional_time',
         );
 
         $this->registry_info_fields = (object) array(
@@ -212,10 +212,17 @@ class As_Attendance_Admin {
             'edit.php?post_type=as-registry',
             __('Add registry', 'as-attendance'),
             __('Add registry', 'as-attendance'),
-            'manage_options',
+            'publish_as-registries',
             'as-attendance/new-registry.php',
             array($this, 'new_registry_page')
         );
+        remove_submenu_page( 'edit.php?post_type=as-registry', 'post-new.php?post_type=as-registry' );
+        $user = wp_get_current_user();
+        if(in_array($user->roles[0], array("attendance_admin", "attendance_collaborator"))){
+            remove_menu_page( 'tools.php' );
+            remove_menu_page( 'edit-comments.php' );
+            remove_menu_page( 'upload.php' );
+        }
         remove_submenu_page( 'edit.php?post_type=as-registry', 'post-new.php?post_type=as-registry' );
 //        add_submenu_page(
 //            'as-attendance.php',
@@ -328,10 +335,157 @@ class As_Attendance_Admin {
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
             'taxonomies' => array('as-group'),
-            'menu_icon' => 'dashicons-universal-access'
+            'menu_icon' => 'dashicons-universal-access',
+            //'capability_type' => 'as-person',
+            //'map_meta_cap' => false
         );
 
         register_post_type( 'as-person', $args );
+        //var_dump($GLOBALS['wp_post_types']['as-person']);die;
+    }
+
+    public function add_person_caps() {
+        global $wp_roles;
+
+        if ( isset($wp_roles) ) {
+            echo "<pre>";print_r($wp_roles->roles['administrator']);echo "</pre>";
+            /*$wp_roles->add_cap( 'administrator', 'edit_as-person' );
+            $wp_roles->add_cap( 'administrator', 'read_as-person' );
+            $wp_roles->add_cap( 'administrator', 'delete_as-person' );
+            $wp_roles->add_cap( 'administrator', 'publish_as-persons' );
+            $wp_roles->add_cap( 'administrator', 'edit_as-persons' );
+            $wp_roles->add_cap( 'administrator', 'edit_others_as-persons' );
+            //$wp_roles->add_cap( 'administrator', 'delete_as-persons' );
+            $wp_roles->add_cap( 'administrator', 'delete_others_as-persons' );
+            $wp_roles->add_cap( 'administrator', 'read_private_as-persons' );
+
+            $wp_roles->add_cap( 'editor', 'read_as-person' );
+            $wp_roles->add_cap( 'editor', 'read_private_as-persons' );
+
+            $wp_roles->add_cap( 'author', 'read_as-person' );
+            $wp_roles->add_cap( 'author', 'read_private_as-persons' );
+
+            $wp_roles->add_cap( 'contributor', 'read_as-person' );
+            $wp_roles->add_cap( 'contributor', 'read_private_as-persons' );*/
+        }
+    }
+
+    public function add_registry_caps() {
+        global $wp_roles;
+
+        if ( isset($wp_roles) ) {
+            $wp_roles->add_cap( 'administrator', 'edit_as-registry' );
+            $wp_roles->add_cap( 'administrator', 'read_as-registry' );
+            $wp_roles->add_cap( 'administrator', 'delete_as-registry' );
+            $wp_roles->add_cap( 'administrator', 'publish_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'edit_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'edit_others_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'delete_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'delete_published_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'delete_others_as-registries' );
+            $wp_roles->add_cap( 'administrator', 'read_private_as-registries' );
+
+            $wp_roles->add_cap( 'editor', 'read_as-registry' );
+            $wp_roles->add_cap( 'editor', 'read_private_as-registries' );
+
+            $wp_roles->add_cap( 'author', 'read_as-registry' );
+            $wp_roles->add_cap( 'author', 'read_private_as-registries' );
+
+            $wp_roles->add_cap( 'contributor', 'read_as-registry' );
+            $wp_roles->add_cap( 'contributor', 'read_private_as-registries' );
+        }
+    }
+
+    public function person_meta_cap($caps, $cap, $user_id, $args) {
+        //var_dump($cap);
+
+        /* If editing, deleting, or reading a as-person, get the post and post type object. */
+        if ( 'edit_as-person' == $cap || 'delete_as-person' == $cap || 'read_as-person' == $cap ) {
+            $post = get_post( $args[0] );
+            $post_type = get_post_type_object( $post->post_type );
+
+            /* Set an empty array for the caps. */
+            $caps = array();
+        }
+
+        /* If editing a as-person, assign the required capability. */
+        if ( 'edit_as-person' == $cap ) {
+            if ( $user_id == $post->post_author )
+                $caps[] = $post_type->cap->edit_posts;
+            else
+                $caps[] = $post_type->cap->edit_others_posts;
+        }
+
+        /* If deleting a as-person, assign the required capability. */
+        elseif ( 'delete_as-person' == $cap ) {
+            if ( $user_id == $post->post_author )
+                $caps[] = $post_type->cap->delete_posts;
+            else
+                $caps[] = $post_type->cap->delete_others_posts;
+        }
+
+        /* If reading a private as-person, assign the required capability. */
+        elseif ( 'read_as-person' == $cap ) {
+
+            if ( 'private' != $post->post_status )
+                $caps[] = 'read';
+            elseif ( $user_id == $post->post_author )
+                $caps[] = 'read';
+            else
+                $caps[] = $post_type->cap->read_private_posts;
+        }
+
+        /* Return the capabilities required by the user. */
+        return $caps;
+    }
+
+    public function registry_meta_cap($caps, $cap, $user_id, $args) {
+
+        /* If editing, deleting, or reading a as-registry, get the post and post type object. */
+        if ( 'edit_as-registry' == $cap || 'delete_as-registry' == $cap || 'read_as-registry' == $cap ) {
+            $post = get_post( $args[0] );
+            $post_type = get_post_type_object( $post->post_type );
+
+            /* Set an empty array for the caps. */
+            $caps = array();
+        }
+
+        /* If editing a as-registry, assign the required capability. */
+        if ( 'edit_as-registry' == $cap ) {
+            if ( $user_id == $post->post_author )
+                $caps[] = $post_type->cap->edit_posts;
+            else
+                $caps[] = $post_type->cap->edit_others_posts;
+        }
+
+        /* If deleting a as-registry, assign the required capability. */
+        elseif ( 'delete_as-registry' == $cap ) {
+            if ( $user_id == $post->post_author )
+                $caps[] = $post_type->cap->delete_posts;
+            else
+                $caps[] = $post_type->cap->delete_others_posts;
+        }
+
+        elseif ( 'delete_published_as-registrys' == $cap ) {
+            if ( $user_id == $post->post_author )
+                $caps[] = $post_type->cap->delete_published_posts;
+            else
+                $caps[] = $post_type->cap->delete_published_posts;
+        }
+
+        /* If reading a private as-registry, assign the required capability. */
+        elseif ( 'read_as-registry' == $cap ) {
+
+            if ( 'private' != $post->post_status )
+                $caps[] = 'read';
+            elseif ( $user_id == $post->post_author )
+                $caps[] = 'read';
+            else
+                $caps[] = $post_type->cap->read_private_posts;
+        }
+
+        /* Return the capabilities required by the user. */
+        return $caps;
     }
 
     public function register_person_metaboxes() {
@@ -488,7 +642,7 @@ class As_Attendance_Admin {
                 }
                 echo "<a href='".get_permalink($registry->ID)."'>".$registry->post_title."</a>";
                 if(isset($reg_meta['annotation'])&&!empty($reg_meta['annotation'])): ?>
-                    <abbr onclick="alert('<?php echo $reg_meta['annotation'] ?>')" title='<?php echo $reg_meta['annotation'] ?>'><span class="dashicons dashicons-testimonial"></span></abbr>
+                    <abbr class="abbr-alert" title="<?php echo $reg_meta['annotation'] ?>"><span class="dashicons dashicons-testimonial"></span></abbr>
                     <?php
                 endif;
                 echo "</li>";
@@ -767,7 +921,6 @@ class As_Attendance_Admin {
             case 'attendance' :
 
                 $attendees_ids = get_post_meta( $post_id, 'registry_attendees_ids', true );
-                //var_dump($attendees_ids);die;
 
                 if ( empty( $attendees_ids ) )
                     echo '0/0';
@@ -941,7 +1094,9 @@ class As_Attendance_Admin {
             'supports' => $supports,
             'register_meta_box_cb' => array($this, 'register_registry_metaboxes'),
             'taxonomies' => array('as-group'),
-            'menu_icon' => 'dashicons-clipboard'
+            'menu_icon' => 'dashicons-clipboard',
+            //'capability_type' => 'as-registry',
+            //'map_meta_cap' => false
         );
 
         register_post_type( 'as-registry', $args );

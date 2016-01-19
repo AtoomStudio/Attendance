@@ -13,3 +13,11 @@
 .person-contact {
     clear: both;
 }
+
+.as-attendance.groups-list {
+    margin-left: 1.25em;
+}
+
+.as-attendance .closed {
+    display: none;
+}

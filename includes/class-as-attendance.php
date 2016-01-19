@@ -167,6 +167,8 @@ class As_Attendance {
 		$this->loader->add_action('init', $plugin_admin, 'register_group_taxonomy');
 		$this->loader->add_action('init', $plugin_admin, 'register_person_custom_post_type');
 		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type');
+//		$this->loader->add_action('init', $plugin_admin, 'add_person_caps');
+//		$this->loader->add_action('init', $plugin_admin, 'add_registry_caps');
         $this->loader->add_action('admin_menu', $plugin_admin, 'as_remove_custom_fields');
         $this->loader->add_action('months_dropdown_results', $plugin_admin, 'as_remove_date_filter', 10, 2);
 		$this->loader->add_action('save_post_as-person', $plugin_admin, 'as_save_person', 10, 3);
@@ -180,6 +182,8 @@ class As_Attendance {
 		$this->loader->add_action('manage_edit-as-registry_sortable_columns', $plugin_admin, 'registry_sortable_columns', 10, 1);
 		$this->loader->add_action('manage_as-registry_posts_custom_column', $plugin_admin, 'registry_columns_column', 10, 2);
 		$this->loader->add_action('parse_query', $plugin_admin, 'as_filter_admin_results', 10, 1);
+//		$this->loader->add_action('map_meta_cap', $plugin_admin, 'person_meta_cap', 10, 4);
+//		$this->loader->add_action('map_meta_cap', $plugin_admin, 'registry_meta_cap', 10, 4);
 
 		//$this->loader->add_action('wp_insert_post_data', $plugin_admin, 'as_save_person', 10, 2);
         //$this->loader->add_action('publish_as-person', $plugin_admin, 'as_edit_title_person', 10, 3);
@@ -199,7 +203,10 @@ class As_Attendance {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-		$this->loader->add_action( 'single_template', $plugin_public, 'load_person_template' );
+		$this->loader->add_action( 'single_template', $plugin_public, 'load_frontend_templates' );
+		$this->loader->add_shortcode( 'as_persons', $plugin_public, 'shortcode_persons' );
+		$this->loader->add_shortcode( 'as_registries', $plugin_public, 'shortcode_registries' );
+		$this->loader->add_shortcode( 'as_new_registry', $plugin_public, 'shortcode_new_registry' );
 
 	}
 

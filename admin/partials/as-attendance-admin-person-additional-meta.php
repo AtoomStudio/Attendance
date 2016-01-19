@@ -66,38 +66,38 @@
         </td>
     </tr>
 
-    <tr>
+    <!--<tr>
         <td colspan="2">
-            <label for="person_additional_workshop_before"><?php _e( 'Has he/she participated in memory workshops before?', 'as-attendance' ); ?></label>
+            <label for="person_additional_workshop_before"><?php /*_e( 'Has he/she participated in memory workshops before?', 'as-attendance' ); */?></label>
         </td>
         <td colspan="4">
-            <input type="radio" name="person_additional_workshop_before" value="Yes" <?php checked( $workshop_before, 'Yes' ); ?> ><?php _e('Yes', 'as-attendance') ?><br>
-            <input type="radio" name="person_additional_workshop_before" value="No" <?php checked( $workshop_before, 'No' ); ?> ><?php _e('No', 'as-attendance') ?><br>
+            <input type="radio" name="person_additional_workshop_before" value="Yes" <?php /*checked( $workshop_before, 'Yes' ); */?> ><?php /*_e('Yes', 'as-attendance') */?><br>
+            <input type="radio" name="person_additional_workshop_before" value="No" <?php /*checked( $workshop_before, 'No' ); */?> ><?php /*_e('No', 'as-attendance') */?><br>
         </td>
     </tr>
 
     <tr>
         <td colspan="2">
-            <label for="person_additional_why_workshop"><?php _e( 'Why wants to participate in the memory workshops?', 'as-attendance' ); ?></label>
+            <label for="person_additional_why_workshop"><?php /*_e( 'Why wants to participate in the memory workshops?', 'as-attendance' ); */?></label>
         </td>
         <td colspan="4">
-            <input type="text" id="person_additional_why_workshop" name="person_additional_why_workshop" class="regular-text" value="<?php echo $why_workshop; ?>">
+            <input type="text" id="person_additional_why_workshop" name="person_additional_why_workshop" class="regular-text" value="<?php /*echo $why_workshop; */?>">
         </td>
     </tr>
 
     <tr>
         <td colspan="2">
-            <label for="person_additional_time"><?php _e( 'Preferred time', 'as-attendance' ); ?></label>
+            <label for="person_additional_time"><?php /*_e( 'Preferred time', 'as-attendance' ); */?></label>
         </td>
         <td colspan="4">
             <select name="person_additional_time" id="person_additional_time">
-                <option value=""><?php _e('Select one', 'as-attendance') ?></option>
-                <option value="Morning 1" <?php selected( $time, 'Morning 1' ); ?>><?php _e('Morning 1', 'as-attendance') ?></option>
-                <option value="Morning 2" <?php selected( $time, 'Morning 2' ); ?>><?php _e('Morning 2', 'as-attendance') ?></option>
-                <option value="Afternoon" <?php selected( $time, 'Afternoon' ); ?>><?php _e('Afternoon', 'as-attendance') ?></option>
-                <option value="Indifferent" <?php selected( $time, 'Indifferent' ); ?>><?php _e('Indifferent', 'as-attendance') ?></option>
+                <option value=""><?php /*_e('Select one', 'as-attendance') */?></option>
+                <option value="Morning 1" <?php /*selected( $time, 'Morning 1' ); */?>><?php /*_e('Morning 1', 'as-attendance') */?></option>
+                <option value="Morning 2" <?php /*selected( $time, 'Morning 2' ); */?>><?php /*_e('Morning 2', 'as-attendance') */?></option>
+                <option value="Afternoon" <?php /*selected( $time, 'Afternoon' ); */?>><?php /*_e('Afternoon', 'as-attendance') */?></option>
+                <option value="Indifferent" <?php /*selected( $time, 'Indifferent' ); */?>><?php /*_e('Indifferent', 'as-attendance') */?></option>
             </select>
         </td>
-    </tr>
+    </tr>-->
 
 </table>

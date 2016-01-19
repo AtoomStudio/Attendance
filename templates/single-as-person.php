@@ -11,43 +11,7 @@ get_header(); ?>
 
 <div id="primary" class="content-area">
 	<main id="main" class="site-main" role="main">
-		<?php
-		// Start the loop.
-		while ( have_posts() ) : the_post();
-			/*'person_info_name' =>
-			array (size=1)
-			  0 => string 'Jordi' (length=5)
-		  'person_info_surname' =>
-			array (size=1)
-			  0 => string 'Castells Navarro' (length=16)
-		  'person_info_birthdate' =>
-			array (size=1)
-			  0 => string '5/8/1929' (length=8)
-		  'person_info_birthplace' =>
-			array (size=1)
-			  0 => string 'Barcelona' (length=9)
-		  'person_info_address' =>
-			array (size=1)
-			  0 => string 'c/Escòcia' (length=10)
-		  'person_info_state' =>
-			array (size=1)
-			  0 => string 'Barcelona' (length=9)
-		  'person_info_town' =>
-			array (size=1)
-			  0 => string 'Barcelona' (length=9)
-		  'person_info_zipcode' =>
-			array (size=1)
-			  0 => string '08030' (length=5)
-		  'person_info_telephone' =>
-			array (size=1)
-			  0 => string '930000000' (length=9)
-		  'person_info_civilstate' =>
-			array (size=1)
-			  0 => string 'Single' (length=6)
-		  'person_info_observations' =>
-			array (size=1)
-			  0 => string 'Cap observació' (length=15)*/
-		?>
+		<?php while ( have_posts() ) : the_post(); ?>
 		<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 			<header class="entry-header">
@@ -311,5 +275,5 @@ get_header(); ?>
 
 </div><!-- .content-area -->
 
-<?php get_sidebar(); ?>
+<?php //get_sidebar(); //Uncomment to show your sidebar! ?>
 <?php get_footer(); ?>

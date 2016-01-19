@@ -15,6 +15,10 @@
       buttonImageOnly: true,
       showOn: "both"
     });
+		$('.abbr-alert').on("click", function(){
+			var msg = $(this).attr('title');
+			alert(msg);
+		})
 
 		var frame,
 			metaBox = $('.set-person-file-wrapper'),

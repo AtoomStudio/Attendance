@@ -30,68 +30,120 @@ class As_Attendance_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
+		//self::create_roles();
 	}
 
-    private function register_person_post_type() {
-//        register_taxonomy(
-//            'as-group',
-//            'as-person',
-//            array(
-//                'label' => __( 'Group' ),
-//                'rewrite' => array( 'slug' => 'group' ),
-//            )
-//        );
-//        //die('1');
-//        $labels = array(
-//            'name'               => __( 'Persons', 'as-attendance' ),
-//            'singular_name'      => __( 'Person', 'as-attendance' ),
-//            'menu_name'          => __( 'Persons', 'as-attendance' ),
-//            'name_admin_bar'     => __( 'Person', 'as-attendance' ),
-//            'add_new'            => __( 'Add New', 'as-attendance' ),
-//            'add_new_item'       => __( 'Add New Person', 'as-attendance' ),
-//            'new_item'           => __( 'New Person', 'as-attendance' ),
-//            'edit_item'          => __( 'Edit Person', 'as-attendance' ),
-//            'view_item'          => __( 'View Person', 'as-attendance' ),
-//            'all_items'          => __( 'All Persons', 'as-attendance' ),
-//            'search_items'       => __( 'Search Persons', 'as-attendance' ),
-//            'parent_item_colon'  => __( 'Parent Persons:', 'as-attendance' ),
-//            'not_found'          => __( 'No Persons found.', 'as-attendance' ),
-//            'not_found_in_trash' => __( 'No Persons found in Trash.', 'as-attendance' )
-//        );
-//        $supports = array(
-//            'title',
-//            'thumbnail',
-//            'custom-fields',
-//        );
-//        $args = array(
-//            'labels' => $labels,
-//            'public' => true,
-//            'show_ui' => true,
-//            'show_in_menu' => true,
-//            //'show_in_menu' => 'as-attendance',
-//            //'supports' => $supports,
-//            //'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
-//            //'taxonomies' => array('as-group')
-//        );
-//        //var_dump(register_post_type( 'as-person', $args ));die;
-//        register_post_type( 'as-person', $args );
+	private function create_roles() {
+		$result = add_role(
+			'attendance_admin',
+			__( 'Attendance administrator' ),
+			array(
+				"activate_plugins" => false,
+				"delete_others_pages" => false,
+				"delete_others_posts" => false,
+				"delete_pages" => false,
+				"delete_posts" => false,
+				"delete_as-persons" => true,
+				"delete_as-person" => true,
+				"delete_as-registries" => true,
+				"delete_published_as-persons" => true,
+				"delete_published_as-registries" => true,
+				"delete_others_as-persons" => true,
+				"delete_others_as-registries" => true,
+				"delete_private_pages" => false,
+				"delete_private_posts" => false,
+				"delete_published_pages" => false,
+				"delete_published_posts" => false,
+				"edit_dashboard" => false,
+				"edit_others_pages" => false,
+				"edit_others_posts" => true,
+				"edit_pages" => false,
+				"edit_posts" => true,
+				"edit_as-persons" => true,
+				"edit_as-registries" => true,
+				"edit_others_as-persons" => true,
+				"edit_others_as-registries" => true,
+				"edit_private_pages" => false,
+				"edit_private_posts" => false,
+				"edit_published_pages" => false,
+				"edit_published_posts" => true,
+				"edit_theme_options" => false,
+				"export" => false,
+				"import" => false,
+				"list_users" => false,
+				"manage_categories" => false,
+				"manage_links" => false,
+				"manage_options" => false,
+				"moderate_comments" => false,
+				"promote_users" => false,
+				"publish_pages" => false,
+				"publish_posts" => true,
+				"publish_as-persons" => true,
+				"publish_as-registries" => true,
+				"read_private_pages" => false,
+				"read_private_posts" => false,
+				"read" => true,
+				"remove_users" => false,
+				"switch_themes" => false,
+				"upload_files" => true,
+			)
+		);
 
-    }
+		$result = add_role(
+			'attendance_collaborator',
+			__( 'Attendance collaborator' ),
+			array(
+				"activate_plugins" => false,
+				"delete_others_pages" => false,
+				"delete_others_posts" => false,
+				"delete_pages" => false,
+				"delete_posts" => false,
+				"delete_as-persons" => false,
+				"delete_as-person" => false,
+				"delete_as-registries" => false,
+				"delete_published_as-persons" => false,
+				"delete_published_as-registries" => false,
+				"delete_others_as-persons" => false,
+				"delete_others_as-registries" => false,
+				"delete_private_pages" => false,
+				"delete_private_posts" => false,
+				"delete_published_pages" => false,
+				"delete_published_posts" => false,
+				"edit_dashboard" => false,
+				"edit_others_pages" => false,
+				"edit_others_posts" => false,
+				"edit_pages" => false,
+				"edit_posts" => false,
+				"edit_as-persons" => false,
+				"edit_as-registries" => true,
+				"edit_others_as-persons" => false,
+				"edit_others_as-registries" => true,
+				"edit_private_pages" => false,
+				"edit_private_posts" => false,
+				"edit_published_pages" => false,
+				"edit_published_posts" => false,
+				"edit_theme_options" => false,
+				"export" => false,
+				"import" => false,
+				"list_users" => false,
+				"manage_categories" => false,
+				"manage_links" => false,
+				"manage_options" => false,
+				"moderate_comments" => false,
+				"promote_users" => false,
+				"publish_pages" => false,
+				"publish_posts" => false,
+				"publish_as-persons" => false,
+				"publish_as-registries" => true,
+				"read_private_pages" => false,
+				"read_private_posts" => false,
+				"read" => true,
+				"remove_users" => false,
+				"switch_themes" => false,
+				"upload_files" => false,
+			)
+		);
 
-//    private function register_person_metaboxes() {
-//        add_meta_box(
-//            'as-person-info',
-//            __('Person data', 'as-attendance'),
-//            array($this, 'person_address_metabox_theme'),
-//            'as-person',
-//            'normal',
-//            'default',
-//            array('address')
-//        );
-//    }
-//
-//    private function person_address_metabox_theme() {
-//
-//    }
+	}
 
 }
