@@ -10,19 +10,25 @@
 <fieldset>
     <legend><?php _e('Filters', 'as-attendance') ?></legend>
     <form action="<?php echo $form_action ?>" method="GET">
-        <div class='postform'>
+        <div class='form-control'>
             <label for="registry_info_date"><?php _e('Date', 'as-attendance') ?></label>
             <input type='text' placeholder='<?php _e('Date', 'as-attendance') ?>' class='datepicker' id="registry_info_date" name='registry_info_date' value='<?php echo $date ?>' readonly />
         </div>
 
-        <label for="registry_attendee"><?php _e('Person: Surname, Name', 'as-attendance') ?></label>
-        <input type='text' placeholder='<?php _e('Person: Surname, Name', 'as-attendance') ?>' name='registry_attendee' id="registry_attendee" value='<?php echo $person->post_title ?>' />
+        <div class='form-control'>
+            <label for="registry_attendee"><?php _e('Person: Surname, Name', 'as-attendance') ?></label>
+            <input type='text' placeholder='<?php _e('Person: Surname, Name', 'as-attendance') ?>' name='registry_attendee' id="registry_attendee" value='<?php echo $person->post_title ?>' />
+        </div>
 
-        <label for="as_group"><?php _e('Group', 'as-attendance') ?></label>
-        <?php echo $group_select; ?>
+        <div class='form-control'>
+            <label for="as_group"><?php _e('Group', 'as-attendance') ?></label>
+            <?php echo $group_select; ?>
+        </div>
 
-        <input type='hidden' name='page_id' value='<?php the_ID() ?>' />
-        <input type='submit' value='<?php _e('Search', 'as-attendance') ?>'  />
+        <div class='form-control'>
+            <input type='hidden' name='page_id' value='<?php the_ID() ?>' />
+            <input type='submit' value='<?php _e('Search', 'as-attendance') ?>'  />
+        </div>
     </form>
     <a href="<?php the_permalink() ?>" class="button" title="<?php _e('Clear Results') ?>"><?php _e('Clear') ?></a>
 </fieldset>

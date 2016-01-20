@@ -6,25 +6,35 @@
  * Time: 12:24
  */
 
-echo "<pre>"; print_r(get_userdata( 1 ));echo "</pre>";
+//echo "<pre>"; print_r(get_userdata( 1 ));echo "</pre>";
 ?>
 <fieldset>
     <legend><?php _e('Filters', 'as-attendance') ?></legend>
     <form action="<?php the_permalink() ?>" method="GET">
-        <label for="person_info_name"><?php _e('Name', 'as-attendance') ?></label>
-        <input type='text' placeholder='<?php _e('Name', 'as-attendance') ?>' id="person_info_name" name='person_info_name' value='<?php echo $name ?>' />
+        <div class="form-control">
+            <label for="person_info_name"><?php _e('Name', 'as-attendance') ?></label>
+            <input type='text' placeholder='<?php _e('Name', 'as-attendance') ?>' id="person_info_name" name='person_info_name' value='<?php echo $name ?>' />
+        </div>
 
-        <label for="person_info_surname"><?php _e('Surname', 'as-attendance') ?></label>
-        <input type='text' placeholder='<?php _e('Surname', 'as-attendance') ?>' id="person_info_surname" name='person_info_surname' value='<?php echo $surname ?>' />
+        <div class="form-control">
+            <label for="person_info_surname"><?php _e('Surname', 'as-attendance') ?></label>
+            <input type='text' placeholder='<?php _e('Surname', 'as-attendance') ?>' id="person_info_surname" name='person_info_surname' value='<?php echo $surname ?>' />
+        </div>
 
-        <label for="person_contact_name"><?php _e('Contact person', 'as-attendance') ?></label>
-        <input type='text' placeholder='<?php _e('Contact person', 'as-attendance') ?>' id="person_contact_name" name='person_contact_name' value='<?php echo $contact ?>' />
+        <div class="form-control">
+            <label for="person_contact_name"><?php _e('Contact person', 'as-attendance') ?></label>
+            <input type='text' placeholder='<?php _e('Contact person', 'as-attendance') ?>' id="person_contact_name" name='person_contact_name' value='<?php echo $contact ?>' />
+        </div>
 
-        <label for="as_group"><?php _e('Group', 'as-attendance') ?></label>
-        <?php echo $group_select ?>
+        <div class="form-control">
+            <label for="as_group"><?php _e('Group', 'as-attendance') ?></label>
+            <?php echo $group_select ?>
+        </div>
 
-        <input type='hidden' name='page_id' value='<?php the_ID() ?>' />
-        <input type='submit' value='<?php _e('Search', 'as-attendance') ?>'  />
+        <div class="form-control">
+            <input type='hidden' name='page_id' value='<?php the_ID() ?>' />
+            <input type='submit' value='<?php _e('Search', 'as-attendance') ?>'  />
+        </div>
     </form>
     <a href="<?php the_permalink() ?>" class="button" title="<?php _e('Clear Results') ?>"><?php _e('Clear') ?></a>
 </fieldset>

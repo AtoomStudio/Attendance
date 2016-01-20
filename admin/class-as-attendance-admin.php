@@ -212,18 +212,28 @@ class As_Attendance_Admin {
             'edit.php?post_type=as-registry',
             __('Add registry', 'as-attendance'),
             __('Add registry', 'as-attendance'),
-            'publish_as-registries',
+            'publish_as-registrys',
             'as-attendance/new-registry.php',
             array($this, 'new_registry_page')
         );
         remove_submenu_page( 'edit.php?post_type=as-registry', 'post-new.php?post_type=as-registry' );
         $user = wp_get_current_user();
-        if(in_array($user->roles[0], array("attendance_admin", "attendance_collaborator"))){
+
+        if($user->roles[0] == "cap_projecte") {
             remove_menu_page( 'tools.php' );
             remove_menu_page( 'edit-comments.php' );
             remove_menu_page( 'upload.php' );
+            remove_menu_page( 'edit.php?post_type=project' );
         }
-        remove_submenu_page( 'edit.php?post_type=as-registry', 'post-new.php?post_type=as-registry' );
+        //echo "<pre>";print_r($user);die;
+        if($user->roles[0] == "tecnic_serveis"){
+            remove_menu_page( 'edit.php' );
+            remove_menu_page( 'tools.php' );
+            remove_menu_page( 'edit-comments.php' );
+            remove_menu_page( 'upload.php' );
+            remove_menu_page( 'edit.php?post_type=project' );
+            remove_menu_page( 'edit.php?post_type=dwqa-question' );
+        }
 //        add_submenu_page(
 //            'as-attendance.php',
 //            __('Persons', 'as-attendance'),
@@ -297,6 +307,12 @@ class As_Attendance_Admin {
             'show_ui'           => true,
             'show_admin_column' => true,
             'query_var'         => true,
+            'capabilities'      => array(
+                'manage_terms' => 'edit_as-registries', //by default only admin
+                'edit_terms' => 'edit_as-registries',
+                'delete_terms' => 'edit_as-registries',
+                'assign_terms' => 'edit_as-registries'
+            ),
         );
 
         register_taxonomy( 'as-group', array( 'as-person', 'as-registry' ), $args );
@@ -336,8 +352,8 @@ class As_Attendance_Admin {
             'register_meta_box_cb' => array($this, 'register_person_metaboxes'),
             'taxonomies' => array('as-group'),
             'menu_icon' => 'dashicons-universal-access',
-            //'capability_type' => 'as-person',
-            //'map_meta_cap' => false
+            'capability_type' => 'as-person',
+            'map_meta_cap' => false
         );
 
         register_post_type( 'as-person', $args );
@@ -1092,11 +1108,12 @@ class As_Attendance_Admin {
             'show_in_menu' => true,
             //'show_in_menu' => 'edit.php?post_type=as-person',
             'supports' => $supports,
+            'hierarchical' => false,
             'register_meta_box_cb' => array($this, 'register_registry_metaboxes'),
             'taxonomies' => array('as-group'),
             'menu_icon' => 'dashicons-clipboard',
-            //'capability_type' => 'as-registry',
-            //'map_meta_cap' => false
+            'capability_type' => array('as-registry', 'as-registries'),
+            'map_meta_cap' => false
         );
 
         register_post_type( 'as-registry', $args );
@@ -1245,7 +1262,8 @@ class As_Attendance_Admin {
         //check_admin_referer( 'save-registry', 'as-registry-info' );
 
         //perform authentication checks
-        if (!current_user_can('edit_post', $post_id)) return false;
+        //die("muero");
+        if (!current_user_can('edit_as-registries', $post_id)) return false;
 
         $group_id = $this->get_url_group($post);
         wp_set_object_terms( $post_id, $group_id, 'as-group' );
@@ -1273,25 +1291,31 @@ class As_Attendance_Admin {
         global $plugin_admin;
         remove_action('save_post_as-registry', array($plugin_admin, 'as_save_registry'));
 
-        $date = $_REQUEST['registry_info_date'];
-        $date_arr = explode('/', $date);
-        $post_date = date('Y-m-d H:i:s', strtotime($date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0]));
+        if($post->post_status != 'auto-draft') {
 
-        //Set the post title in format: Date - Group
-        $post_title = sanitize_text_field($date) . ' - ' . $group->name;
+            $date = $_REQUEST['registry_info_date'];
+            $date_arr = explode('/', $date);
+            $post_date = date('Y-m-d H:i:s', strtotime($date_arr[2] . '-' . $date_arr[1] . '-' . $date_arr[0]));
 
-        $edited_post = array(
-            'ID' => $post_id,
-            'post_title' => $post_title,
-            'post_date' => $post_date,
-            'post_date_gmt' => $post_date,
-            'post_modified' => $post_date,
-            'post_modified_gmt' => $post_date,
-            'post_status' => 'publish',
-        );
+            //Set the post title in format: Date - Group
+            $post_title = sanitize_text_field($date) . ' - ' . $group->name;
 
-        if ( !in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
-            $edited_post['post_name'] = sanitize_title( $post_title );
+            $edited_post = array(
+                'ID' => $post_id,
+                'post_title' => $post_title,
+                'post_date' => $post_date,
+                'post_date_gmt' => $post_date,
+                'post_modified' => $post_date,
+                'post_modified_gmt' => $post_date,
+                'post_status' => 'publish',
+            );
+            if(empty($date)) {
+                $edited_post['post_status'] = 'draft';
+            }
+
+            if ( !in_array( $post->post_status, array( 'draft', 'pending', 'auto-draft' ) ) ) {
+                $edited_post['post_name'] = sanitize_title( $post_title );
+            }
         }
         wp_update_post( $edited_post );
 

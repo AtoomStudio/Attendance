@@ -184,32 +184,6 @@ get_header(); ?>
 					</dd>
 				</dl>
 
-				<dl>
-					<dt>
-						<?php _e( 'Has he/she participated in memory workshops before?', 'as-attendance' ); ?>
-					</dt>
-					<dd>
-						<?php _e($meta['person_additional_workshop_before'][0], 'as-attendance')  ?>
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<?php _e( 'Why wants to participate in the memory workshops?', 'as-attendance' ); ?>
-					</dt>
-					<dd>
-						<?php echo $meta['person_additional_why_workshop'][0]  ?>
-					</dd>
-				</dl>
-
-				<dl>
-					<dt>
-						<?php _e( 'Preferred time', 'as-attendance' ); ?>
-					</dt>
-					<dd>
-						<?php _e($meta['person_additional_time'][0], 'as-attendance')  ?>
-					</dd>
-				</dl>
 			</div>
 
 			<div class="person-files">

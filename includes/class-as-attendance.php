@@ -165,8 +165,8 @@ class As_Attendance {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action('admin_menu', $plugin_admin, 'create_attendance_menu');
 		$this->loader->add_action('init', $plugin_admin, 'register_group_taxonomy');
-		$this->loader->add_action('init', $plugin_admin, 'register_person_custom_post_type');
-		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type');
+		$this->loader->add_action('init', $plugin_admin, 'register_person_custom_post_type', 10);
+		$this->loader->add_action('init', $plugin_admin, 'register_registry_custom_post_type', 11);
 //		$this->loader->add_action('init', $plugin_admin, 'add_person_caps');
 //		$this->loader->add_action('init', $plugin_admin, 'add_registry_caps');
         $this->loader->add_action('admin_menu', $plugin_admin, 'as_remove_custom_fields');

@@ -21,3 +21,9 @@
 .as-attendance .closed {
     display: none;
 }
+
+.single-as-registry article,
+.single-as-person article {
+    max-width: 1024px;
+    margin: 30px auto;
+}

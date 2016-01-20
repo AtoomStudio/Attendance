@@ -1,506 +1,589 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: Attendace v1.0.0\n"
+"POT-Creation-Date: 2016-01-20 12:48+0100\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 1.8.6\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 1.6.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es_ES\n"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-filters.php:
-#: admin/partials/as-attendance-admin-registry-filters.php:5
-msgid "Clear"
-msgstr "Limpiar"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-filters.php:
-#: admin/partials/as-attendance-admin-registry-filters.php:5
-msgid "Clear Results"
-msgstr "Limpiar resutados"
-
-#. Text in function
-#: admin/partials/as-attendance-admin-person-info-meta.php:64
-msgid "%d years old."
-msgstr "%d años"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-registry-attendees.php:25
-msgid "+ Add annotation"
-msgstr "+ Añadir observación"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Add New"
-msgstr "Añadir nuevo"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Add New Group"
-msgstr "Añadir grupo nuevo"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Add New Person"
-msgstr "Añadir persona nueva"
-
-#. Text in echo
+#: admin/class-as-attendance-admin.php:213
+#: admin/class-as-attendance-admin.php:214
 #: admin/partials/as-attendance-admin-new-registry.php:17
-#: admin/class-as-attendance-admin.php:1
 msgid "Add registry"
 msgstr "Añadir registro"
 
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Additional info"
-msgstr "Información adicional"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:81
-msgid "Address"
-msgstr "Dirección"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:107
-msgid "Afternoon"
-msgstr "Tarde"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "All Groups"
-msgstr "Todos los grupos"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "All Registries"
-msgstr "Todos los registros"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "All Persons"
-msgstr "Todas las personas"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-registry-info.php:24
-msgid "Annotation"
-msgstr "Observación"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Attendance"
-msgstr "Asistencia"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:33
-msgid "Birth date"
-msgstr "Fecha de nacimiento"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:71
-msgid "Birthplace"
-msgstr "Lugar de nacimiento"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:62
-msgid "Catalan"
-msgstr "Catalán"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:131
-msgid "Civil State"
-msgstr "Estado civil"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Contact 1"
-msgstr "Contacto 1"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Contact 2"
-msgstr "Contacto 2"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-filters.php:5
-msgid "Contact person"
-msgstr "Persona de contacto"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:140
-msgid "Couple"
-msgstr "Pareja"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:45
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:45
-msgid "Cousins"
-msgstr "Primo/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-registry-info.php:14
-#: admin/partials/as-attendance-admin-registry-filters.php:2
-msgid "Date"
-msgstr "Fecha"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-files-meta.php:29
-msgid "Delete File"
-msgstr "Borrar archivo"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:139
-msgid "Divorced"
-msgstr "Divorciado/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:18
-#: admin/partials/as-attendance-admin-person-additional-meta.php:24
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:18
-msgid "E.g. CEO, Sales Lead, Designer"
-msgstr "-"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Edit Group"
-msgstr "Editar grupo"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Edit Person"
-msgstr "Editar persona"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:15
-msgid "Education level"
-msgstr "Nivel de instrucción"
-
-#. Text in function
-#: admin/partials/as-attendance-admin-person-files-meta.php:17
-msgid "File %s"
-msgstr "Archivo %s"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Files"
-msgstr "Archivos"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:20
-msgid "First grade"
-msgstr "Primer grado"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Group"
-msgstr "Grupo"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
+#: admin/class-as-attendance-admin.php:291
 msgid "Groups"
 msgstr "Grupos"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:81
-msgid "Has he/she participated in memory workshops before?"
-msgstr "¿Ha participado anteriormente en talleres de memoria?"
+#: admin/class-as-attendance-admin.php:292
+#: admin/class-as-attendance-admin.php:301
+#: admin/class-as-attendance-admin.php:812
+#: admin/class-as-attendance-admin.php:827 templates/list-persons.php:23
+#: templates/list-persons.php:35 templates/list-registries.php:21
+#: templates/list-registries.php:33
+msgid "Group"
+msgstr "Grupo"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:42
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:42
-msgid "Husband / spouse"
-msgstr "Marido / Esposa"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:108
-msgid "Indifferent"
-msgstr "Indiferente"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:138
-msgid "Married"
-msgstr "Casado/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:48
-msgid "Medical history of interest"
-msgstr "Antecedentes médicos de interés"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:71
-msgid "Memory workshop"
-msgstr "Taller de memoria"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:105
-msgid "Morning 1"
-msgstr "Mañana 1"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:106
-msgid "Morning 2"
-msgstr "Mañana 2"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:57
-msgid "Mother tongue"
-msgstr "Lengua materna"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:13
-#: admin/partials/as-attendance-admin-person-filters.php:3
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:13
-#: admin/partials/as-attendance-admin-person-info-meta.php:14
-msgid "Name"
-msgstr "Nombre"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:43
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:43
-msgid "Nephew / niece"
-msgstr "Sobrino/a"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "New Group Name"
-msgstr "Nombre del grupo nuevo"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "New Person"
-msgstr "Persona nueva"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:85
-msgid "No"
-msgstr "No"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "No Persons found in Trash."
-msgstr "No hay personas en la papelera."
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "No Persons found."
-msgstr "No se han encontrado personas."
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:148
-msgid "Observations"
-msgstr "Observaciones"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:64
-msgid "Others"
-msgstr "Otros"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Parent Group"
-msgstr "Grupo padre"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Parent Group:"
-msgstr "Grupo padre:"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Parent Persons:"
-msgstr "Persona padre:"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Person"
-msgstr "Persona"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Person data"
-msgstr "Información de la persona"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-registry-filters.php:4
-msgid "Person: Surname, Name"
-msgstr "Persona: Apellidos, Nombre"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:39
-msgid "Personal characteristics and hobbies"
-msgstr "Características personales y aficiones"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Persons"
-msgstr "Personas"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:100
-msgid "Preferred time"
-msgstr "Preferencia horaria"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-registry-attendees.php:19
-msgid "Present"
-msgstr "Presente"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:30
-msgid "Profession"
-msgstr "Profesión"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Registries"
-msgstr "Registros"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:34
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:34
-msgid "Relationship"
-msgstr "Parentesco"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
+#: admin/class-as-attendance-admin.php:293
 msgid "Search Groups"
 msgstr "Buscar grupos"
 
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
-msgid "Search Persons"
-msgstr "Buscar personas"
+#: admin/class-as-attendance-admin.php:294
+msgid "All Groups"
+msgstr "Todos los grupos"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:21
-msgid "Second grade"
-msgstr "Segundo grado"
+#: admin/class-as-attendance-admin.php:295
+msgid "Parent Group"
+msgstr "Grupo padre"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-files-meta.php:28
-msgid "Select File"
-msgstr "Seleccionar archivo"
+#: admin/class-as-attendance-admin.php:296
+msgid "Parent Group:"
+msgstr "Grupo padre:"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-new-registry.php:18
-msgid "Select the group you want to create the attendance registry"
-msgstr "Elija el grupo del que quiera crear un registro"
+#: admin/class-as-attendance-admin.php:297
+msgid "Edit Group"
+msgstr "Editar grupo"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:46
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:46
-msgid "Sibling-in-law"
-msgstr "Cuñado/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:44
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:44
-msgid "Siblings"
-msgstr "Hermano/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:137
-msgid "Single"
-msgstr "Soltero"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:40
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:40
-msgid "Son / daughter"
-msgstr "Hijo/a"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:41
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:41
-msgid "Son / daughter-in-law"
-msgstr "Yerno / Nuera"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:63
-msgid "Spanish"
-msgstr "Castellano"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:91
-msgid "State"
-msgstr "Provincia"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-filters.php:2
-#: admin/partials/as-attendance-admin-person-info-meta.php:23
-msgid "Surname"
-msgstr "Apellidos"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:24
-#: admin/partials/as-attendance-admin-person-contact-1-meta.php:24
-#: admin/partials/as-attendance-admin-person-info-meta.php:121
-msgid "Telephone"
-msgstr "Teléfono"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:101
-msgid "Town"
-msgstr "Población"
-
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:22
-msgid "University education"
-msgstr "Estudios universitarios"
-
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
+#: admin/class-as-attendance-admin.php:298
 msgid "Update Group"
 msgstr "Actualizar grupo"
 
-#. Text in function
-#: admin/class-as-attendance-admin.php:1
+#: admin/class-as-attendance-admin.php:299
+msgid "Add New Group"
+msgstr "Añadir grupo nuevo"
+
+#: admin/class-as-attendance-admin.php:300
+msgid "New Group Name"
+msgstr "Nombre del grupo nuevo"
+
+#: admin/class-as-attendance-admin.php:325
+#: admin/class-as-attendance-admin.php:327
+msgid "Persons"
+msgstr "Personas"
+
+#: admin/class-as-attendance-admin.php:326
+#: admin/class-as-attendance-admin.php:328
+msgid "Person"
+msgstr "Persona"
+
+#: admin/class-as-attendance-admin.php:329
+#: admin/class-as-attendance-admin.php:1088
+msgid "Add New"
+msgstr "Añadir nuevo"
+
+#: admin/class-as-attendance-admin.php:330
+msgid "Add New Person"
+msgstr "Añadir persona nueva"
+
+#: admin/class-as-attendance-admin.php:331
+msgid "New Person"
+msgstr "Persona nueva"
+
+#: admin/class-as-attendance-admin.php:332
+msgid "Edit Person"
+msgstr "Editar persona"
+
+#: admin/class-as-attendance-admin.php:333
 msgid "View Person"
 msgstr "Ver persona"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:91
-msgid "Why wants to participate in the memory workshops?"
-msgstr "¿Porqué quiere participar en el taller de memoria?"
+#: admin/class-as-attendance-admin.php:334
+msgid "All Persons"
+msgstr "Todas las personas"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:141
-msgid "Widower"
-msgstr "Viudo/a"
+#: admin/class-as-attendance-admin.php:335
+msgid "Search Persons"
+msgstr "Buscar personas"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-additional-meta.php:84
-msgid "Yes"
-msgstr "Sí"
+#: admin/class-as-attendance-admin.php:336
+msgid "Parent Persons:"
+msgstr "Persona padre:"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:111
-msgid "Zip code"
-msgstr "Código postal"
+#: admin/class-as-attendance-admin.php:337
+msgid "No Persons found."
+msgstr "No se han encontrado personas."
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:40
-msgid "Day"
-msgstr "Día"
+#: admin/class-as-attendance-admin.php:338
+msgid "No Persons found in Trash."
+msgstr "No hay personas en la papelera."
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-info-meta.php:46
-msgid "Month"
-msgstr "Mes"
+#: admin/class-as-attendance-admin.php:510
+msgid "Person data"
+msgstr "Información de la persona"
 
-#. Text in echo
-#: admin/partials/as-attendance-admin-person-contact-2-meta.php:39
-#: admin/partials/as-attendance-admin-person-additional-meta.php:104
+#: admin/class-as-attendance-admin.php:518
+#: admin/class-as-attendance-admin.php:813 templates/list-persons.php:36
+#: templates/single-as-person.php:119
+msgid "Contact 1"
+msgstr "Contacto 1"
+
+#: admin/class-as-attendance-admin.php:526
+#: admin/class-as-attendance-admin.php:814 templates/list-persons.php:37
+#: templates/single-as-person.php:130
+msgid "Contact 2"
+msgstr "Contacto 2"
+
+#: admin/class-as-attendance-admin.php:534
+msgid "Additional info"
+msgstr "Información adicional"
+
+#: admin/class-as-attendance-admin.php:542 templates/single-as-person.php:216
+msgid "Files"
+msgstr "Archivos"
+
+#: admin/class-as-attendance-admin.php:550
+#: admin/class-as-attendance-admin.php:910
+#: admin/class-as-attendance-admin.php:1084
+#: admin/class-as-attendance-admin.php:1086
+msgid "Registries"
+msgstr "Registros"
+
+#: admin/class-as-attendance-admin.php:668
+msgid "See al registries"
+msgstr "Todos los registros"
+
+#: admin/class-as-attendance-admin.php:670
+msgid "No registries found"
+msgstr "No se han encontrado registros."
+
+#: admin/class-as-attendance-admin.php:761
+#: admin/class-as-attendance-admin.php:789
+#, php-format
+msgid "Show All %s"
+msgstr "Mostrar %s"
+
+#: admin/class-as-attendance-admin.php:810
+#: admin/partials/as-attendance-admin-person-filters.php:2
+#: admin/partials/as-attendance-admin-person-info-meta.php:23
+#: templates/list-persons.php:17 templates/list-persons.php:18
+msgid "Surname"
+msgstr "Apellidos"
+
+#: admin/class-as-attendance-admin.php:811
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:13
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:13
+#: admin/partials/as-attendance-admin-person-filters.php:3
+#: admin/partials/as-attendance-admin-person-info-meta.php:14
+#: templates/list-persons.php:14 templates/list-persons.php:15
+#: templates/list-persons.php:34 templates/single-as-person.php:30
+msgid "Name"
+msgstr "Nombre"
+
+#: admin/class-as-attendance-admin.php:815
+#: admin/class-as-attendance-admin.php:836
+msgid "Actions"
+msgstr "Acciones"
+
+#: admin/class-as-attendance-admin.php:826
+#: admin/partials/as-attendance-admin-registry-filters.php:2
+#: admin/partials/as-attendance-admin-registry-info.php:14
+#: templates/list-registries.php:14 templates/list-registries.php:15
+#: templates/list-registries.php:32 templates/new-registry-form.php:21
+msgid "Date"
+msgstr "Fecha"
+
+#: admin/class-as-attendance-admin.php:831
+#: admin/partials/as-attendance-admin-registry-attendees.php:19
+#: templates/list-registries.php:36 templates/new-registry-form.php:58
+msgid "Present"
+msgstr "Presente"
+
+#: admin/class-as-attendance-admin.php:833 templates/list-registries.php:38
+#: templates/single-as-registry.php:22
+msgid "Attendance"
+msgstr "Asistencia"
+
+#: admin/class-as-attendance-admin.php:835
+#: admin/partials/as-attendance-admin-registry-info.php:24
+#: templates/list-registries.php:40 templates/new-registry-form.php:31
+#: templates/single-as-registry.php:25
+msgid "Annotation"
+msgstr "Observación"
+
+#: admin/class-as-attendance-admin.php:908
+#: admin/class-as-attendance-admin.php:989
+msgid "Edit"
+msgstr "Editar"
+
+#: admin/class-as-attendance-admin.php:912
+#: admin/class-as-attendance-admin.php:991
+msgid "Delete"
+msgstr "Borrar"
+
+#: admin/class-as-attendance-admin.php:1085
+#: admin/class-as-attendance-admin.php:1087
+msgid "Registry"
+msgstr "Registro"
+
+#: admin/class-as-attendance-admin.php:1089
+msgid "Add New Registry"
+msgstr "Añadir registro"
+
+#: admin/class-as-attendance-admin.php:1090
+msgid "New Registry"
+msgstr "Añadir registro"
+
+#: admin/class-as-attendance-admin.php:1091
+msgid "Edit Registry"
+msgstr "Editar registro"
+
+#: admin/class-as-attendance-admin.php:1092
+msgid "View Registry"
+msgstr "Ver registro"
+
+#: admin/class-as-attendance-admin.php:1093
+msgid "All Registries"
+msgstr "Todos los registros"
+
+#: admin/class-as-attendance-admin.php:1094
+msgid "Search Registries"
+msgstr "Buscar registros"
+
+#: admin/class-as-attendance-admin.php:1095
+msgid "Parent Registries:"
+msgstr "Registros padre:"
+
+#: admin/class-as-attendance-admin.php:1096
+msgid "No Registries found."
+msgstr "No se han encontrado registros."
+
+#: admin/class-as-attendance-admin.php:1097
+msgid "No Registries found in Trash."
+msgstr "No hay registros en la papelera."
+
+#: admin/class-as-attendance-admin.php:1126
+msgid "Date and annotations"
+msgstr "Fecha y observaciones"
+
+#: admin/class-as-attendance-admin.php:1135
+msgid "Attendees"
+msgstr "Asistentes"
+
+#: admin/class-as-attendance-admin.php:1145 templates/new-registry-form.php:67
+msgid "Save"
+msgstr "Guardar"
+
+#: admin/partials/as-attendance-admin-new-registry.php:18
+#: templates/new-registry-form.php:13
+msgid "Select the group you want to create the attendance registry"
+msgstr "Elija el grupo del que quiera crear un registro"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:15
+#: templates/single-as-person.php:144
+msgid "Education level"
+msgstr "Nivel de instrucción"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:19
+#: admin/partials/as-attendance-admin-person-additional-meta.php:61
 #: admin/partials/as-attendance-admin-person-contact-1-meta.php:39
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:39
 #: admin/partials/as-attendance-admin-person-info-meta.php:136
 msgid "Select one"
 msgstr "Elija uno"
 
-#. Text in echo
+#: admin/partials/as-attendance-admin-person-additional-meta.php:20
+msgid "First grade"
+msgstr "Primer grado"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:21
+msgid "Second grade"
+msgstr "Segundo grado"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:22
+msgid "University education"
+msgstr "Estudios universitarios"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:30
+#: templates/single-as-person.php:153
+msgid "Profession"
+msgstr "Profesión"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:39
+#: templates/single-as-person.php:162
+msgid "Personal characteristics and hobbies"
+msgstr "Características personales y aficiones"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:48
+#: templates/single-as-person.php:171
+msgid "Medical history of interest"
+msgstr "Antecedentes médicos de interés"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:57
+#: templates/single-as-person.php:180
+msgid "Mother tongue"
+msgstr "Lengua materna"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:62
+msgid "Catalan"
+msgstr "Catalán"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:63
+msgid "Spanish"
+msgstr "Castellano"
+
+#: admin/partials/as-attendance-admin-person-additional-meta.php:64
+msgid "Others"
+msgstr "Otros"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:24
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:24
+#: admin/partials/as-attendance-admin-person-info-meta.php:121
+#: templates/single-as-person.php:104
+msgid "Telephone"
+msgstr "Teléfono"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:34
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:34
+msgid "Relationship"
+msgstr "Parentesco"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:40
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:40
+msgid "Son / daughter"
+msgstr "Hijo/a"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:41
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:41
+msgid "Son / daughter-in-law"
+msgstr "Yerno / Nuera"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:42
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:42
+msgid "Husband / spouse"
+msgstr "Marido / Esposa"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:43
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:43
+msgid "Nephew / niece"
+msgstr "Sobrino/a"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:44
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:44
+msgid "Siblings"
+msgstr "Hermano/a"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:45
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:45
+msgid "Cousins"
+msgstr "Primo/a"
+
+#: admin/partials/as-attendance-admin-person-contact-1-meta.php:46
+#: admin/partials/as-attendance-admin-person-contact-2-meta.php:46
+msgid "Sibling-in-law"
+msgstr "Cuñado/a"
+
+#: admin/partials/as-attendance-admin-person-files-meta.php:17
+#: templates/single-as-person.php:242
+#, php-format
+msgid "File %s"
+msgstr "Archivo %s"
+
+#: admin/partials/as-attendance-admin-person-files-meta.php:28
+msgid "Select File"
+msgstr "Seleccionar archivo"
+
+#: admin/partials/as-attendance-admin-person-files-meta.php:29
+msgid "Delete File"
+msgstr "Borrar archivo"
+
+#: admin/partials/as-attendance-admin-person-filters.php:5
+#: templates/list-persons.php:20 templates/list-persons.php:21
+msgid "Contact person"
+msgstr "Persona de contacto"
+
+#: admin/partials/as-attendance-admin-person-filters.php:6
+#: admin/partials/as-attendance-admin-registry-filters.php:5
+#: templates/list-persons.php:29 templates/list-registries.php:27
+msgid "Clear Results"
+msgstr "Limpiar resutados"
+
+#: admin/partials/as-attendance-admin-person-filters.php:6
+#: admin/partials/as-attendance-admin-registry-filters.php:5
+#: templates/list-persons.php:29 templates/list-registries.php:27
+msgid "Clear"
+msgstr "Limpiar"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:33
+#: templates/single-as-person.php:39
+msgid "Birth date"
+msgstr "Fecha de nacimiento"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:40
+msgid "Day"
+msgstr "Día"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:46
+msgid "Month"
+msgstr "Mes"
+
 #: admin/partials/as-attendance-admin-person-info-meta.php:52
 msgid "Year"
 msgstr "Año"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:64
+#: templates/single-as-person.php:53
+#, php-format
+msgid "%d years old."
+msgstr "%d años"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:71
+#: templates/single-as-person.php:60
+msgid "Birthplace"
+msgstr "Lugar de nacimiento"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:81
+#: templates/single-as-person.php:91
+msgid "Address"
+msgstr "Dirección"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:91
+msgid "State"
+msgstr "Provincia"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:101
+msgid "Town"
+msgstr "Población"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:111
+msgid "Zip code"
+msgstr "Código postal"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:131
+#: templates/single-as-person.php:69
+msgid "Civil State"
+msgstr "Estado civil"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:137
+msgid "Single"
+msgstr "Soltero"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:138
+msgid "Married"
+msgstr "Casado/a"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:139
+msgid "Divorced"
+msgstr "Divorciado/a"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:140
+msgid "Couple"
+msgstr "Pareja"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:141
+msgid "Widower"
+msgstr "Viudo/a"
+
+#: admin/partials/as-attendance-admin-person-info-meta.php:148
+#: templates/single-as-person.php:78
+msgid "Observations"
+msgstr "Observaciones"
+
+#: admin/partials/as-attendance-admin-registry-attendees.php:25
+#: templates/new-registry-form.php:49
+msgid "+ Add annotation"
+msgstr "+ Añadir observación"
+
+#: admin/partials/as-attendance-admin-registry-filters.php:4
+#: templates/list-registries.php:18 templates/list-registries.php:19
+msgid "Person: Surname, Name"
+msgstr "Persona: Apellidos, Nombre"
+
+#: includes/class-as-attendance-activator.php:39
+msgid "Attendance administrator"
+msgstr "Administrador asistencia"
+
+#: includes/class-as-attendance-activator.php:94
+msgid "Attendance collaborator"
+msgstr "Colaborador asistencia"
+
+#: public/class-as-attendance-public.php:150
+#: public/class-as-attendance-public.php:301
+msgid "Show All"
+msgstr "Mostrar todos"
+
+#: public/class-as-attendance-public.php:213
+#: public/class-as-attendance-public.php:345
+msgid "Back"
+msgstr "Atrás"
+
+#: public/class-as-attendance-public.php:214
+#: public/class-as-attendance-public.php:346
+msgid "Onward"
+msgstr "Adelante"
+
+#: public/class-as-attendance-public.php:373
+#: templates/single-as-registry.php:44
+msgid "Yes"
+msgstr "Sí"
+
+#: public/class-as-attendance-public.php:373
+#: templates/single-as-registry.php:44
+msgid "No"
+msgstr "No"
+
+#: public/class-as-attendance-public.php:402
+msgid "Access denied"
+msgstr "Acceso denegado"
+
+#: templates/list-persons.php:12 templates/list-registries.php:11
+msgid "Filters"
+msgstr "Filtros"
+
+#: templates/list-persons.php:27 templates/list-registries.php:25
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/single-as-person.php:25
+msgid "Information"
+msgstr "Información"
+
+#: templates/single-as-person.php:116
+msgid "Contact persons"
+msgstr "Personas de contacto"
+
+#: templates/single-as-person.php:141
+msgid "Additional"
+msgstr "Información adicional"
+
+#: templates/single-as-person.php:189
+msgid "Has he/she participated in memory workshops before?"
+msgstr "¿Ha participado anteriormente en talleres de memoria?"
+
+#: templates/single-as-person.php:198
+msgid "Why wants to participate in the memory workshops?"
+msgstr "¿Porqué quiere participar en el taller de memoria?"
+
+#: templates/single-as-person.php:207
+msgid "Preferred time"
+msgstr "Preferencia horaria"
+
+#. translators: %s: Name of current post
+#: templates/single-as-person.php:260 templates/single-as-registry.php:65
+#, php-format
+msgid "Edit<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Editar<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#~ msgid "Afternoon"
+#~ msgstr "Tarde"
+
+#~ msgid "E.g. CEO, Sales Lead, Designer"
+#~ msgstr "-"
+
+#~ msgid "Indifferent"
+#~ msgstr "Indiferente"
+
+#~ msgid "Memory workshop"
+#~ msgstr "Taller de memoria"
+
+#~ msgid "Morning 1"
+#~ msgstr "Mañana 1"
+
+#~ msgid "Morning 2"
+#~ msgstr "Mañana 2"

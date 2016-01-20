@@ -14,7 +14,7 @@
         <?php echo $output ?>
     <?php else: ?>
         <form action="<?php the_permalink() ?>" method="POST">
-            <h2><strong><?php echo $group->name ?></strong></h2>
+            <h2><?php echo $group->name ?></h2>
             <table class="form-table">
                 <tr>
                     <td colspan="2">

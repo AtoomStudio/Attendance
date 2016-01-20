@@ -5,7 +5,7 @@
 		$('.datepicker').datepicker({
 			firstDay: 1,
 			dateFormat: "dd/mm/yy",
-			buttonImage: "wp-admin/images/date-button.gif",
+			buttonImage: "/wp-admin/images/date-button.gif",
 			buttonImageOnly: true,
 			showOn: "both"
 		});

@@ -236,7 +236,7 @@ class As_Attendance_Public {
 
 		wp_reset_postdata();
 
-		include '/../templates/list-persons.php';
+        require plugin_dir_path( __FILE__ ) . '../templates/list-persons.php';
 
 	}
 
@@ -392,13 +392,13 @@ class As_Attendance_Public {
 
 		wp_reset_postdata();
 
-		include '/../templates/list-registries.php';
+        require plugin_dir_path( __FILE__ ) . '../templates/list-registries.php';
 
 	}
 
     public function shortcode_new_registry() {
 
-        if( !current_user_can( 'publish_as-registries' ) ) {
+        if( !current_user_can( 'edit_as-registrys' ) ) {
             _e("Access denied");
             return false;
         }
@@ -406,6 +406,7 @@ class As_Attendance_Public {
         $step = "";
         $group_id = get_query_var( 'as-group', false );
         $submitted = isset($_REQUEST['submitted']);
+
         if(!$submitted) {
 
             if (!$group_id) {
@@ -456,7 +457,9 @@ class As_Attendance_Public {
 
                 wp_reset_postdata();
             }
-            include '/../templates/new-registry-form.php';
+
+            require plugin_dir_path( __FILE__ ) . '../templates/new-registry-form.php';
+
         } else {
             $group = get_term($group_id, 'as-group');
             $post_title = $_POST['registry_info_date'] . ' - ' . $group->name;
